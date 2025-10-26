@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI职场动物人格鉴定书</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF7D00',
+            secondary: '#0078D7',
+            accent: '#FF5722',
+            neutral: '#F5F5F5',
+            dark: '#333333',
+            light: '#FFFFFF'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-in': 'slideIn 0.5s ease-in-out',
+            'scale-in': 'scaleIn 0.3s ease-in-out',
+            'bounce-in': 'bounceIn 0.5s ease-in-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            bounceIn: {
+              '0%': { transform: 'scale(0.8)', opacity: '0' },
+              '70%': { transform: 'scale(1.05)', opacity: '1' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+          },
+          boxShadow: {
+            'custom': '0 4px 20px rgba(0, 0, 0, 0.08)',
+            'hover': '0 10px 30px rgba(0, 0, 0, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .bg-gradient-primary {
+        background: linear-gradient(135deg, #FF7D00 0%, #FF5722 100%);
+      }
+      .bg-gradient-secondary {
+        background: linear-gradient(135deg, #0078D7 0%, #005A9E 100%);
+      }
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral min-h-screen font-sans text-dark">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-custom sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-paw text-primary text-2xl"></i>
+        <h1 class="text-xl font-bold text-dark">MBTI职场动物人格鉴定书</h1>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="#" class="text-dark hover:text-primary transition-all-300">首页</a>
+        <a href="#about" class="text-dark hover:text-primary transition-all-300">关于测试</a>
+        <a href="#animal-types" class="text-dark hover:text-primary transition-all-300">动物类型</a>
+      </div>
+      <button class="md:hidden text-dark focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="bg-gradient-primary text-white py-16 md:py-24">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-3xl md:text-5xl font-bold mb-4 text-shadow animate-fade-in">发现你的职场动物人格</h1>
+      <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto animate-slide-in">通过科学的MBTI测试，揭示你的职场性格类型，获取个性化的职业发展建议</p>
+      <a href="test.html" class="inline-block bg-white text-primary font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all-300 animate-bounce-in">
+        开始测试
+        <i class="fa fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- 关于测试 -->
+  <section id="about" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">关于MBTI职场动物人格测试</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-neutral rounded-xl p-6 shadow-custom card-hover">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-users text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-2">科学依据</h3>
+          <p class="text-center text-gray-600">基于经典MBTI理论，结合职场环境特点，经过大量实践验证的测试模型</p>
+        </div>
+        
+        <div class="bg-neutral rounded-xl p-6 shadow-custom card-hover">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-paw text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-2">动物形象</h3>
+          <p class="text-center text-gray-600">将16种MBTI类型对应16种不同的职场动物，通过生动的动物形象让抽象的人格类型更加直观易懂</p>
+        </div>
+        
+        <div class="bg-neutral rounded-xl p-6 shadow shadow-custom card-hover">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-lightbulb-o text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font font-bold text-center mb-2">实用建议</h3>
+          <p class="text-center text-gray-600">不仅揭示你的人格类型，还提供针对性的职业发展建议、团队协作指南和能量管理方法</p>
+        </div>
+        
+        <div class="bg-neutral rounded-xl p-6 shadow-custom card-hover">
+          <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+            <i class="fa fa-file-pdf-o text-primary text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-2">精美报告</h3>
+          <p class="text-center text-gray-600">测试完成后生成精美PDF报告，包含详细分析和实用建议，可直接下载保存</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 动物类型展示 -->
+  <section id="animal-types" class="py-16 bg-neutral">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">16种职场动物人格</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- 蚂蚁 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2038073513758818317~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=Jy3ZeUKv2fdT2f7b79ZVNN6yWwc%3D" alt="蚂蚁" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">蚂蚁 (ISTJ)</h3>
+            <p class="text-sm text-gray-600">可靠、勤奋、恪守规则，是团队的基石</p>
+          </div>
+        </div>
+        
+        <!-- 牧羊犬 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1852326812524478464~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=R5UIi8N8iVLEFmgzqb%2FPDRyeZXM%3D" alt="牧羊犬" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">牧羊犬 (ISFJ)</h3>
+            <p class="text-sm text-gray-600">忠诚、守护、无私奉献，是同事最信赖的后盾</p>
+          </div>
+        </div>
+        
+        <!-- 猫头鹰 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1800412323098001423~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=BKb7V2AMHDcbcXc7K69bJ6IvC2M%3D" alt="猫头鹰" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">猫头鹰 (INFJ)</h3>
+            <p class="text-sm text-gray-600">智慧、深邃、富有远见，是团队的精神导师</p>
+          </div>
+        </div>
+        
+        <!-- 狼 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p26-doubao-search-sign.byteimg.com/labis/abca4cf97557fc2a38ab97697d7ea362~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=MU%2FiYm3eNHBI2bUONo08lG1Jfuc%3D" alt="狼" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">狼 (INTJ)</h3>
+            <p class="text-sm text-gray-600">孤傲、战略、目光长远，是独行的战略家</p>
+          </div>
+        </div>
+        
+        <!-- 狐狸 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/913481098000334920~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=uei0dRdBCrPW4oSDF1eaAhR1LKM%3D" alt="狐狸" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">狐狸 (ISTP)</h3>
+            <p class="text-sm text-gray-600">机敏、务实、善于解决实际问题，是故障排除专家</p>
+          </div>
+        </div>
+        
+        <!-- 猫 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2347708606718541842~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=g3yoBXPOJTSPUdxmgTMs6i3GSuU%3D" alt="猫" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">猫 (ISFP)</h3>
+            <p class="text-sm text-gray-600">优雅、审美在线、随性而为，是办公室的氛围营造师</p>
+          </div>
+        </div>
+        
+        <!-- 树袋熊 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1837740820053360650~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=x%2FQJOAzcfJX%2Fx5ak0wxUKGounFQ%3D" alt="树袋熊" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">树袋熊 (INFP)</h3>
+            <p class="text-sm text-gray-600">温和、理想主义、坚守内心价值观，是团队的治愈者</p>
+          </div>
+        </div>
+        
+        <!-- 章鱼 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2303139310155989004~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=ZN5M9pl6KMPTGK08co2oT%2BrawZs%3D" alt="章鱼" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">章鱼 (INTP)</h3>
+            <p class="text-sm text-gray-600">好奇、逻辑至上、思维发散，是点子库和理论家</p>
+          </div>
+        </div>
+        
+        <!-- 海豹 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2028776412779380738~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=I2L74eH6bVCfT%2FXaDWPAn%2BDERyE%3D" alt="海豹" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">海豹 (ESTP)</h3>
+            <p class="text-sm text-gray-600">敏锐、灵活、活在当下，是即兴发挥的谈判高手</p>
+          </div>
+        </div>
+        
+        <!-- 鹦鹉 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2261318766939996171~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=e97MAeHUA7I%2BwzLns05zad3JOJ8%3D" alt="鹦鹉" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">鹦鹉 (ESFP)</h3>
+            <p class="text-sm text-gray-600">热情、色彩斑斓、热爱表现，是公司里的快乐源泉</p>
+          </div>
+        </div>
+        
+        <!-- 狗 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1782174019247931405~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=dY5rsvUMNLaQhHBDfmmc%2FHRhvnE%3D" alt="狗" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">狗 (ENFP)</h3>
+            <p class="text-sm text-gray-600">热情、好奇心重、善于鼓舞人心，是团队的活力催化剂</p>
+          </div>
+        </div>
+        
+        <!-- 狐獴 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p11-doubao-search-sign.byteimg.com/labis/de5fcc798ecdafa79532369b797b28e8~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=7NjF491AS%2F3%2FZhmWWlSLG%2FM1EXo%3D" alt="狐獴" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">狐獴 (ENTP)</h3>
+            <p class="text-sm text-gray-600">机灵、爱辩论、头脑风暴王者，是挑战规则的创新者</p>
+          </div>
+        </div>
+        
+        <!-- 蜜蜂 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1881386088848687118~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=mq1Nu2Iy%2BtskV%2F2ZB7%2FGIHl5kUs%3D" alt="蜜蜂" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">蜜蜂 (ESTJ)</h3>
+            <p class="text-sm text-gray-600">高效、有组织、执行力强，是天然的团队管理者</p>
+          </div>
+        </div>
+        
+        <!-- 海豚 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2257773546353852426~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=igwLbe0lhH5bCLQFbqxPQUy1jIM%3D" alt="海豚" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">海豚 (ESFJ)</h3>
+            <p class="text-sm text-gray-600">友善、合群、关心他人，是团队的粘合剂和协调员</p>
+          </div>
+        </div>
+        
+        <!-- 大象 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1918107612559048734~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=v7MAwl%2F0UQ45T8IT1Pdim3X%2F1yM%3D" alt="大象" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">大象 (ENFJ)</h3>
+            <p class="text-sm text-gray-600">有感染力、有责任感、天生的领导者，是团队的大家长</p>
+          </div>
+        </div>
+        
+        <!-- 狮子 -->
+        <div class="bg-white rounded-xl overflow-hidden shadow-custom card-hover">
+          <img src="https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1017871927502700570~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=lw0Jf1DE0mskkQoC3o%2Fx%2Bz6hivk%3D" alt="狮子" class="w-full h-48 object-cover">
+          <div class="p-4">
+            <h3 class="text-lg font-bold mb-1">狮子 (ENTJ)</h3>
+            <p class="text-sm text-gray-600">霸气、果断、目标导向，是天生的指挥官</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center space-x-2">
+            <i class="fa fa-paw text-primary text-xl"></i>
+            <h2 class="text-lg font-bold">MBTI职场动物人格鉴定书</h2>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">发现你的职场动物人格，提升职业发展</p>
+        </div>
+        
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-weixin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-weibo text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-github text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-6 pt-6 text-center text-sm text-gray-500">
+        <p>&copy; 2025 MBTI职场动物人格鉴定书. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

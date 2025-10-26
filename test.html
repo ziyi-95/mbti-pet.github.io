@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI职场动物人格测试</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF7D00',
+            secondary: '#0078D7',
+            accent: '#FF5722',
+            neutral: '#F5F5F5',
+            dark: '#333333',
+            light: '#FFFFFF'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-in': 'slideIn 0.5s ease-in-out',
+            'scale-in': 'scaleIn 0.3s ease-in-out',
+            'bounce-in': 'bounceIn 0.5s ease-in-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            bounceIn: {
+              '0%': { transform: 'scale(0.8)', opacity: '0' },
+              '70%': { transform: 'scale(1.05)', opacity: '1' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+          },
+          boxShadow: {
+            'custom': '0 4px 20px rgba(0, 0, 0, 0.08)',
+            'hover': '0 10px 30px rgba(0, 0, 0, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .bg-gradient-primary {
+        background: linear-gradient(135deg, #FF7D00 0%, #FF5722 100%);
+      }
+      .bg-gradient-secondary {
+        background: linear-gradient(135deg, #0078D7 0%, #005A9E 100%);
+      }
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+      .progress-bar {
+        height: 8px;
+        border-radius: 4px;
+        background-color: #E5E7EB;
+        overflow: hidden;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #FF7D00 0%, #FF5722 100%);
+        transition: width 0.5s ease;
+      }
+      .option-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .option-card:hover {
+        transform: translateY(-3px);
+      }
+      .option-card.selected {
+        border-color: #FF7D00;
+        background-color: rgba(255, 125, 0, 0.05);
+      }
+      .option-card.selected::after {
+        content: '';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        background-color: #FF7D00;
+        border-radius: 50%;
+      }
+      .option-card.selected::before {
+        content: '✓';
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral min-h-screen font-sans text-dark">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-custom sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-paw text-primary text-2xl"></i>
+        <h1 class="text-xl font-bold text-dark">MBTI职场动物人格鉴定书</h1>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="text-dark hover:text-primary transition-all-300">首页</a>
+        <a href="index.html#about" class="text-dark hover:text-primary transition-all-300">关于测试</a>
+        <a href="index.html#animal-types" class="text-dark hover:text-primary transition-all-300">动物类型</a>
+      </div>
+      <button class="md:hidden text-dark focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 测试区域 -->
+  <section id="test" class="py-16 bg-neutral">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">MBTI职场动物人格测试</h2>
+      
+      <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-custom p-6 md:p-8">
+        <!-- 测试进度 -->
+        <div class="mb-8">
+          <div class="flex justify-between text-sm text-gray-500 mb-2">
+            <span>问题 <span id="current-question">1</span>/20</span>
+            <span>进度 <span id="progress-percentage">5%</span></span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 5%"></div>
+          </div>
+        </div>
+        
+        <!-- 测试题目题目 -->
+        <div id="test-container">
+          <div id="question-container" class="mb-6 animate-fade-in">
+            <h3 id="question-text" class="text-xl font-xl font-bold mb-4">在周末周末，你更倾向于于如何充电？</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="option-card border border-gray-200 rounded-lg p-4 relative" data-option="A" data-score="E">
+                <h4 class="font-bold mb-2">A. 约朋友出门，参加社交活动。</h4>
+              </div>
+              
+              <div class="option-card border border-gray-200 rounded-lg p-4 relative" data-option="B" data-score="I">
+                <h4 class="font-bold mb-2">B. 在家休息，享受独处时光。</h4>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 导航按钮 -->
+          <div class="flex justify-between">
+            <button id="prev-btn" class="bg-gray-200 text-gray-600 font-bold py-2 px-6 rounded-lg hover:bg-gray-300 transition-all-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+              <i class="fa fa-arrow-left mr-2"></i> 上一题
+            </button>
+            
+            <button id="next-btn" class="bg-primary text-white font-bold py-2 px-6 rounded-lg hover:bg-accent transition-all-300">
+              下一题 <i class="fa fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center space-x-2">
+            <i class="fa fa-paw text-primary text-xl"></i>
+            <h2 class="text-lg font-bold">MBTI职场动物人格鉴定书</h2>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">发现你的职场动物人格，提升职业发展</p>
+        </div>
+        
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-weixin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-weibo text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-github text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-6 pt-6 text-center text-sm text-gray-500">
+        <p>&copy; 2025 MBTI职场动物人格鉴定书. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 测试题目数据
+    const questions = [
+      {
+        text: "在周末，你更倾向于如何充电？",
+        options: [
+          { letter: "A", text: "约朋友出门，参加社交活动。", score: "E" },
+          { letter: "B", text: "在家休息，享受独处时光。", score: "I" }
+        ]
+      },
+      {
+        text: "当你思考一个复杂问题时，你通常？",
+        options: [
+          { letter: "A", text: "喜欢说出来，和他人讨论来理清思路。", score: "E" },
+          { letter: "B", text: "在内心反复思索，自己找到答案。", score: "I" }
+        ]
+      },
+      {
+        text: "公司团建对你来说意味着？",
+        options: [
+          { letter: "A", text: "令人期待的社交和娱乐机会。", score: "E" },
+          { letter: "B", text: "一项需要消耗精力的工作任务。", score: "I" }
+        ]
+      },
+      {
+        text: "你更欣赏哪种类型的同事？",
+        options: [
+          { letter: "A", text: "注重实际，能把事情一步一个脚印做好的。", score: "S" },
+          { letter: "B", text: "头脑灵活，总能提出新奇点和未来规划的。", score: "N" }
+        ]
+      },
+      {
+        text: "当你学习一项新技能时，你更关注？",
+        options: [
+          { letter: "A", text: "具体的操作步骤和当下的实用技巧。", score: "S" },
+          { letter: "B", text: "这项技能的底层逻辑和未来的应用可能。", score: "N" }
+        ]
+      },
+      {
+        text: "老板说“市场前景很好”，你第一时间会想到？",
+        options: [
+          { letter: "A", text: "具体的增长数据和已看到的成功案例。", score: "S" },
+          { letter: "B", text: "未来的宏大蓝图和无限的想象空间。", score: "N" }
+        ]
+      },
+      {
+        text: "在团队中做决策时，你的首要原则是？",
+        options: [
+          { letter: "A", text: "怎么样做最合理、最高效、最符合逻辑。", score: "T" },
+          { letter: "B", text: "怎么样做能让团队成员都感觉良好，关系和谐。", score: "F" }
+        ]
+      },
+      {
+        text: "当同事的工作出现失误时，你更可能？",
+        options: [
+          { letter: "A", text: "直接指出错误所在，并分析其后果。", score: "T" },
+          { letter: "B", text: "先安慰对方，再一起寻找补救办法。", score: "F" }
+        ]
+      },
+      {
+        text: "完成一个项目后，你更希望听到的评价是？",
+        options: [
+          { letter: "A", text: "“你的方案逻辑严谨，结果非常出色。”", score: "T" },
+          { letter: "B", text: "“和你合作的过程非常愉快，你很体贴。”", score: "F" }
+        ]
+      },
+      {
+        text: "你如何管理你的工作日？",
+        options: [
+          { letter: "A", text: "提前制定清晰的计划清单，并严格遵守。", score: "J" },
+          { letter: "B", text: "有个大致方向，喜欢灵活应对，随性而为。", score: "P" }
+        ]
+      },
+      {
+        text: "面对一个紧迫的截止日期，你通常？",
+        options: [
+          { letter: "A", text: "早早开始，稳步推进，在截止前从容完成。", score: "J" },
+          { letter: "B", text: "在压力下效率最高，总是在最后一刻完成。", score: "P" }
+        ]
+      },
+      {
+        text: "你认为“不确定性”在工作中是？",
+        options: [
+          { letter: "A", text: "应该尽量避免的风险和麻烦。", score: "J" },
+          { letter: "B", text: "可能带来惊喜的机遇和挑战。", score: "P" }
+        ]
+      },
+      {
+        text: "你更擅长处理哪类任务？",
+        options: [
+          { letter: "A", text: "有明确流程和标准的重复性工作。", score: "S" },
+          { letter: "B", text: "需要创造力和发散思维的全新挑战。", score: "N" }
+        ]
+      },
+      {
+        text: "在会议上，你的角色更接近？",
+        options: [
+          { letter: "A", text: "推动议程、得出结论的负责人。", score: "J" },
+          { letter: "B", text: "提出各种新选项和新可能的发起人。", score: "P" }
+        ]
+      },
+      {
+        text: "同事向你倾诉私人烦恼，你会？",
+        options: [
+          { letter: "A", text: "帮他分析问题，给出理性的解决方案。", score: "T" },
+          { letter: "B", text: "努力理解他的感受，提供情感上的支持。", score: "F" }
+        ]
+      },
+      {
+        text: "当你进入一个新团队，你会？",
+        options: [
+          { letter: "A", text: "主动认识大家，快速融入集体。", score: "E" },
+          { letter: "B", text: "先观察一段时间，和个别人建立深度连接。", score: "I" }
+        ]
+      },
+      {
+        text: "你相信什么？",
+        options: [
+          { letter: "A", text: "事实、数据和经验。", score: "S" },
+          { letter: "B", text: "灵感、直觉和可能性。", score: "N" }
+        ]
+      },
+      {
+        text: "你更希望自己以什么而闻名？",
+        options: [
+          { letter: "A", text: "有能力，有成果，说到做到。", score: "TJ" },
+          { letter: "B", text: "有同情心，有洞察力，是个好人。", score: "FP" }
+        ]
+      },
+      {
+        text: "如果赢得一次团体旅行，你希望是？",
+        options: [
+          { letter: "A", text: "行程紧凑、景点丰富的观光之旅。", score: "J" },
+          { letter: "B", text: "随心所欲、探索发现的冒险之旅。", score: "P" }
+        ]
+      },
+      {
+        text: "你认为职场中最重要的品质是？",
+        options: [
+          { letter: "A", text: "效率和能力。", score: "T" },
+          { letter: "B", text: "合作和沟通。", score: "F" }
+        ]
+      }
+    ];
+
+    // 测试逻辑
+    document.addEventListener('DOMContentLoaded', function() {
+      let currentQuestion = 0;
+      const answers = {};
+      const scores = {
+        E: 0, I: 0,
+        S: 0, N: 0,
+        T: 0, F: 0,
+        J: 0, P: 0
+      };
+
+      // DOM元素
+      const questionText = document.getElementById('question-text');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const currentQuestionSpan = document.getElementById('current-question');
+      const progressPercentageSpan = document.getElementById('progress-percentage');
+      const progressBarFill = document.querySelector('.progress-bar-fill');
+
+      // 加载问题
+      function loadQuestion(index) {
+        const question = questions[index];
+        questionText.textContent = question.text;
+        
+        // 更新选项
+        const optionsContainer = document.querySelector('.grid.grid-cols-1');
+        optionsContainer.innerHTML = '';
+        
+        question.options.forEach(option => {
+          const optionCard = document.createElement('div');
+          optionCard.className = 'option-card border border-gray-200 rounded-lg p-4 relative';
+          if (answers[index] === option.letter) {
+            optionCard.classList.add('selected');
+          }
+          
+          optionCard.innerHTML = `
+            <h4 class="font-bold mb-2">${option.letter}. ${option.text}</h4>
+          `;
+          
+          optionCard.addEventListener('click', function() {
+            // 移除其他选项的选中状态
+            document.querySelectorAll('.option-card').forEach(card => {
+              card.classList.remove('selected');
+            });
+            
+            // 添加当前选项的选中状态
+            this.classList.add('selected');
+            
+            // 保存答案
+            answers[index] = option.letter;
+            
+            // 更新分数
+            updateScores(option.score);
+          });
+          
+          optionsContainer.appendChild(optionCard);
+        });
+        
+        // 更新进度
+        currentQuestionSpan.textContent = index + 1;
+        const progress = Math.round(((index + 1) / questions.length) * 100);
+        progressPercentageSpan.textContent = `${progress}%`;
+        progressBarFill.style.width = `${progress}%`;
+        
+        // 更新按钮状态
+        prevBtn.disabled = index === 0;
+        nextBtn.textContent = index === questions.length - 1 ? '完成测试' : '下一题';
+        nextBtn.innerHTML = index === questions.length - 1 ? 
+          '完成测试 <i class="fa fa-check ml-2"></i>' : 
+          '下一题 <i class="fa fa-arrow-right ml-2"></i>';
+      }
+
+      // 更新分数
+      function updateScores(score) {
+        if (score.includes('T') || score.includes('J')) {
+          if (score.includes('T')) scores.T++;
+          if (score.includes('J')) scores.J++;
+        } else if (score.includes('F') || score.includes('P')) {
+          if (score.includes('F')) scores.F++;
+          if (score.includes('P')) scores.P++;
+        } else {
+          scores[score]++;
+        }
+      }
+
+      // 计算MBTI类型
+      function calculateMBTI() {
+        const EorI = scores.E > scores.I ? 'E' : 'I';
+        const SorN = scores.S > scores.N ? 'S' : 'N';
+        const TorF = scores.T > scores.F ? 'T' : 'F';
+        const JorP = scores.J > scores.P ? 'J' : 'P';
+        
+        return EorI + SorN + TorF + JorP;
+      }
+
+      // 绑定事件
+      prevBtn.addEventListener('click', function() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          loadQuestion(currentQuestion);
+        }
+      });
+
+      nextBtn.addEventListener('click', function() {
+        // 检查是否选择了选项
+        if (!answers[currentQuestion]) {
+          alert('请选择一个选项');
+          return;
+        }
+        
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          loadQuestion(currentQuestion);
+        } else {
+          // 计算MBTI类型并跳转到结果页
+          const mbtiType = calculateMBTI();
+          window.location.href = `result.html?type=${mbtiType}`;
+        }
+      });
+
+      // 加载第一题
+      loadQuestion(currentQuestion);
+    });
+  </script>
+</body>
+</html>

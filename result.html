@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI职场动物人格测试结果</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- html2canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF7D00',
+            secondary: '#0078D7',
+            accent: '#FF5722',
+            neutral: '#F5F5F5',
+            dark: '#333333',
+            light: '#FFFFFF'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-in-out',
+            'slide-in': 'slideIn 0.5s ease-in-out',
+            'scale-in': 'scaleIn 0.3s ease-in-out',
+            'bounce-in': 'bounceIn 0.5s ease-in-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideIn: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
+            scaleIn: {
+              '0%': { transform: 'scale(0.95)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            bounceIn: {
+              '0%': { transform: 'scale(0.8)', opacity: '0' },
+              '70%': { transform: 'scale(1.05)', opacity: '1' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+          },
+          boxShadow: {
+            'custom': '0 4px 20px rgba(0, 0, 0, 0.08)',
+            'hover': '0 10px 30px rgba(0, 0, 0, 0.12)',
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .bg-gradient-primary {
+        background: linear-gradient(135deg, #FF7D00 0%, #FF5722 100%);
+      }
+      .bg-gradient-secondary {
+        background: linear-gradient(135deg, #0078D7 0%, #005A9E 100%);
+      }
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+      .result-card {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease;
+      }
+      .result-card.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .animal-image {
+        transition: all 0.5s ease;
+      }
+      .result-card.show .animal-image {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral min-h-screen font-sans text-dark">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-custom sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-paw text-primary text-2xl"></i>
+        <h1 class="text-xl font-bold text-dark">MBTI职场职场动物人格鉴定书</h1>
+      </div>
+      <div class="hidden md:flex items-center space-x-6">
+        <a href="index.html" class="text-dark hover:text-primary transition-all-300">首页</a>
+        <a href="index.html#about" class="text-dark hover:text-primary transition-all-300">关于测试</a>
+        <a href="index.html#animal-types" class="text-dark hover:text-primary transition-all-300">动物类型</a>
+      </div>
+      <button class="md:hidden text-dark focus:outline-none">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 结果区域 -->
+  <section id="result" class="py-16 bg-neutral">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">MBTI职场动物人格人格测试结果</h2>
+      
+      <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-custom p-6 md:p-8">
+        <!-- 结果内容 -->
+        <div id="result-container">
+          <div id="result-content" class="result-card">
+            <!-- 结果将通过JavaScript动态生成 -->
+          </div>
+          
+          <!-- 操作按钮 -->
+          <div class="flex flex-col md:flex-row justify-between mt-8 space-y-4 md:space-y-0">
+            <button id="share-btn" class="bg-secondary text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-all-300 flex items-center justify-center">
+              <i class="fa fa-share-alt mr-2"></i> 分享结果
+            </button>
+            
+            <button id="download-btn" class="bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-accent transition-all-300 flex items-center justify-center">
+              <i class="fa fa-download mr-2"></i> 下载PDF报告
+            </button>
+            
+            <button id="restart-btn" class="bg-gray-200 text-gray-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-300 transition-all-300 flex items-center justify-center">
+              <i class="fa fa-refresh mr-2"></i> 重新测试
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center space-x-2">
+            <i class="fa fa-paw text-primary text-xl"></i>
+            <h2 class="text-lg font-bold">MBTI职场动物人格鉴定书</h2>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">发现你的职场动物人格，提升职业发展</p>
+        </div>
+        
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-weixin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-weibo text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-linkedin text-xl"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-primary transition-all-300">
+            <i class="fa fa-github text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-6 pt-6 text-center text-sm text-gray-500">
+        <p>&copy; 2025 MBTI职场动物人格鉴定书. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // MBTI类型与职场动物对应关系
+    const mbtiAnimalMap = {
+      ISTJ: {
+        animal: "蚂蚁",
+        image: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2038073513758818317~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=Jy3ZeUKv2fdT2f7b79ZVNN6yWwc%3D",
+        description: "可靠、勤奋、恪守规则，是团队的基石。"
+      },
+      ISFJ: {
+        animal: "牧羊犬",
+        image: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1852326812524478464~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=R5UIi8N8iVLEFmgzqb%2FPDRyeZXM%3D",
+        description: "忠诚、守护、无私奉献，是同事最信赖的后盾。"
+      },
+      INFJ: {
+        animal: "猫头鹰",
+        image: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1800412323098001423~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=BKb7V2AMHDcbcXc7K69bJ6IvC2M%3D",
+        description: "智慧、深邃、富有远见，是团队的精神导师。"
+      },
+      INTJ: {
+        animal: "狼",
+        image: "https://p26-doubao-search-sign.byteimg.com/labis/abca4cf97557fc2a38ab97697d7ea362~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=MU%2FiYm3eNHBI2bUONo08lG1Jfuc%3D",
+        description: "孤傲、战略、目光长远，是独行的战略家。"
+      },
+      ISTP: {
+        animal: "狐狸",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/913481098000334920~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=uei0dRdBCrPW4oSDF1eaAhR1LKM%3D",
+        description: "机敏、务实、善于解决实际问题，是故障排除专家。"
+      },
+      ISFP: {
+        animal: "猫",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2347708606718541842~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=g3yoBXPOJTSPUdxmgTMs6i3GSuU%3D",
+        description: "优雅、审美在线、随性而为，是办公室的氛围营造师。"
+      },
+      INFP: {
+        animal: "树袋熊",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1837740820053360650~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=x%2FQJOAzcfJX%2Fx5ak0wxUKGounFQ%3D",
+        description: "温和、理想主义、坚守内心价值观，是团队的治愈者。"
+      },
+      INTP: {
+        animal: "章鱼",
+        image: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2303139310155989004~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=ZN5M9pl6KMPTGK08co2oT%2BrawZs%3D",
+        description: "好奇、逻辑至上、思维发散，是点子库和理论家。"
+      },
+      ESTP: {
+        animal: "海豹",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2028776412779380738~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=I2L74eH6bVCfT%2FXaDWPAn%2BDERyE%3D",
+        description: "敏锐、灵活、活在当下，是即兴发挥的谈判高手。"
+      },
+      ESFP: {
+        animal: "鹦鹉",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2261318766939996171~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=e97MAeHUA7I%2BwzLns05zad3JOJ8%3D",
+        description: "热情、色彩斑斓、热爱表现，是公司里的快乐源泉。"
+      },
+      ENFP: {
+        animal: "狗",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1782174019247931405~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=dY5rsvUMNLaQhHBDfmmc%2FHRhvnE%3D",
+        description: "热情、好奇心重、善于鼓舞人心，是团队的活力催化剂。"
+      },
+      ENTP: {
+        animal: "狐獴",
+        image: "https://p11-doubao-search-sign.byteimg.com/labis/de5fcc798ecdafa79532369b797b28e8~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=7NjF491AS%2F3%2FZhmWWlSLG%2FM1EXo%3D",
+        description: "机灵、爱辩论、头脑风暴王者，是挑战规则的创新者。"
+      },
+      ESTJ: {
+        animal: "蜜蜂",
+        image: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1881386088848687118~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956386&x-signature=mq1Nu2Iy%2BtskV%2F2ZB7%2FGIHl5kUs%3D",
+        description: "高效、有组织、执行力强，是天然的团队管理者。"
+      },
+      ESFJ: {
+        animal: "海豚",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2257773546353852426~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=igwLbe0lhH5bCLQFbqxPQUy1jIM%3D",
+        description: "友善、合群、关心他人，是团队的粘合剂和协调员。"
+      },
+      ENFJ: {
+        animal: "大象",
+        image: "https://p11-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1918107612559048734~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=v7MAwl%2F0UQ45T8IT1Pdim3X%2F1yM%3D",
+        description: "有感染力、有责任感、天生的领导者，是团队的大家长。"
+      },
+      ENTJ: {
+        animal: "狮子",
+        image: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/1017871927502700570~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=lw0Jf1DE0mskkQoC3o%2Fx%2Bz6hivk%3D",
+        description: "霸气、果断、目标导向，是天生的指挥官。"
+      }
+    };
+
+    // MBTI类型详细报告
+    const mbtiReports = {
+      ISTJ: {
+        title: "ISTJ 「蚂蚁」",
+        profile: "你是职场的「基石蚂蚁」，勤奋、可靠、秩序井然。你信奉规则，做事一丝不苟，是团队中最让人放心的存在。交付给你的任务，就如同放在了最坚固的保险箱里。",
+        strengths: [
+          "极致靠谱：凡事有交代，件件有着落。",
+          "细节掌控者：能发现流程中最微小的漏洞。",
+          "档案库大脑：对过往数据和经验了如指掌。"
+        ],
+        weaknesses: [
+          "难以应对计划外的突发变化。",
+          "有时会因过度注重细节而忽略大局。",
+          "可能被认为缺乏灵活性。"
+        ],
+        energySources: [
+          "使用日历软件，享受计划被打满勾的成就感。",
+          "建立自己的“工作SOP（标准流程）库”。",
+          "每天给自己一个“尝试微改变”的小挑战。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ESTJ「蜜蜂」（效率搭档）", "ESFJ「海豚」（暖心辅助）"],
+          potentialEnemies: ["ENFP「狗」（太随性）", "ENTP「狐獴」（老想推翻规则）"]
+        },
+        motto: "“世界运转，源于每一个齿轮的恪尽职守。——ISTJ「蚂蚁」”"
+      },
+      ISFJ: {
+        title: "ISFJ 「牧羊犬」",
+        profile: "你是团队最忠诚的「守护牧羊犬」，默默观察并支持着每一位成员。你细腻、体贴，是办公室里的“活雷锋”，总能记得同事的喜好，默默打点好一切支持性工作。",
+        strengths: [
+          "无私奉献：总在背后默默支撑团队。",
+          "超强记性：记得所有同事的偏好和需求。",
+          "危机安抚者：在团队紧张时能主动调节氛围。"
+        ],
+        weaknesses: [
+          "不善于为自己争取利益，容易吃亏。",
+          "容易过度承接他人的情绪而内耗。",
+          "害怕发生冲突和正面拒绝。"
+        ],
+        energySources: [
+          "定期清理“情绪垃圾桶”，学会情绪剥离。",
+          "练习说“不”，保护自己的精力。",
+          "建立一个“夸夸清单”，记录别人对你的感谢。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ESFJ「海豚」（互助姐妹）", "ESTJ「蜜蜂」（被你服务，替你出头）"],
+          potentialEnemies: ["ENTJ「狮子」（显得过于无情）", "INTP「章鱼」（察觉不到你的付出）"]
+        },
+        motto: "“你的后背，交给我来守护。——ISFJ「牧羊犬」”"
+      },
+      INFJ: {
+        title: "INFJ 「猫头鹰」",
+        profile: "你是职场深度的「洞察猫头鹰」，安静、神秘且富有远见。你看待问题总能直击本质，是团队的精神导师。你追求工作的意义感，无法忍受虚伪和无谓的内卷。",
+        strengths: [
+          "读心术：能敏锐洞察他人的动机和需求。",
+          "未来预言家：善于预见长期趋势和潜在问题。",
+          "理念守护者：为团队注入灵魂和信念。"
+        ],
+        weaknesses: [
+          "理想主义，易因现实落差而感到失望。",
+          "内心戏丰富，容易陷入精神内耗。",
+          "对办公室政治和虚伪社交感到深恶痛绝。"
+        ],
+        energySources: [
+          "通过写作、艺术等方式输出自己的思想。",
+          "寻找一小片能践行自己理想的“净土”。",
+          "定期“断网”，进行信息斋戒，保护内心能量。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ENFJ「大象」（能实现你的理想）", "INTP「章鱼」（深度思想共鸣）"],
+          potentialEnemies: ["ESTP「海豹」（过于现实）", "ISTJ「蚂蚁」（无法理解你的抽象）"]
+        },
+        motto: "“在众人注视表象时，我独望月亮的背面。——INFJ「猫头鹰」”"
+      },
+      INTJ: {
+        title: "INTJ 「狼」",
+        profile: "你是行走在职场荒野中的「孤狼」，独立、冷静、战略眼光卓越。你享受独自规划蓝图，用效率和能力碾压一切困难。对你而言，团队更像是实现目标的工具。",
+        strengths: [
+          "战略布局：善于制定长期、系统和高效的策略。",
+          "效率至上：本能地优化一切不合理的流程。",
+          "理性洞察：能排除情绪干扰，直指问题核心。"
+        ],
+        weaknesses: [
+          "不擅长处理人际情感，显得孤高冷漠。",
+          "容易因为追求完美方案而错失行动先机。",
+          "对能力不足的同伴缺乏耐心。"
+        ],
+        energySources: [
+          "绘制你的“战略地图”，享受宏观规划的乐趣。",
+          "找到少数你认可的“聪明大脑”进行交流。",
+          "将大目标分解为可执行的“征服清单”。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ENTP「狐獴」（帮你完善逻辑）", "ISTJ「蚂蚁」（完美执行你的计划）"],
+          potentialEnemies: ["ESFP「鹦鹉」（觉得你无趣）", "ESFJ「海豚」（认为你没人情味）"]
+        },
+        motto: "“我的世界，就是我的战略棋盘。——INTJ「狼」”"
+      },
+      ISTP: {
+        title: "ISTP 「狐狸」",
+        profile: "你是职场「机敏的狐狸」，冷静、务实，是解决突发危机的专家。你信奉“有用即真理”，动手能力极强，在混乱中总能找到最直接有效的解决路径。",
+        strengths: [
+          "临场救火员：越是紧急情况，头脑越冷静。",
+          "工具大师：善于利用各种工具解决问题。",
+          "实用主义：能抛开理论，找到最直接的方案。"
+        ],
+        weaknesses: [
+          "缺乏长期规划，讨厌被长期承诺束缚。",
+          "对抽象理论和公司愿景兴趣缺缺。",
+          "可能因过于“就事论事”而显得冷漠。"
+        ],
+        energySources: [
+          "接手有挑战性的“故障排除”任务。",
+          "学习一门新手艺或研究工具的使用。",
+          "确保工作中有足够的“自由活动”时间。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ESTP「海豹」（玩伴搭档）", "ENTJ「狮子」（给你资源和空间去解决问题）"],
+          potentialEnemies: ["INFJ「猫头鹰」（觉得你缺乏深度）", "ENFJ「大象」（试图对你进行情感动员）"]
+        },
+        motto: "“别跟我说为什么，告诉我怎么修。——ISTP「狐狸」”"
+      },
+      ISFP: {
+        title: "ISFP 「猫」",
+        profile: "你是办公室里的「美学顾问猫」，优雅、随性、审美在线。你按自己的节奏工作，默默为环境增添美感，讨厌冲突和高压，是团队的氛围营造师和温柔观察者。",
+        strengths: [
+          "美学滤镜：天生对色彩、设计和和谐感有敏锐度。",
+          "共情天赋：能细腻地体察他人的情绪。",
+          "灵活应变：能很好地适应变化，随遇而安。"
+        ],
+        weaknesses: [
+          "非常反感严厉的批评和高压管理。",
+          "不善于为自己争取，容易在竞争中隐形。",
+          "过于注重当下感受，可能缺乏长远规划。"
+        ],
+        energySources: [
+          "打造一个舒适美观的工位环境。",
+          "从事能发挥审美和共情能力的工作。",
+          "用音乐、绘画等方式进行情绪表达。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ESFJ「海豚」（给你温暖和鼓励）", "ENFP「狗」（欣赏你的独特，带你玩）"],
+          potentialEnemies: ["ENTJ「狮子」（压力来源）", "ISTJ「蚂蚁」（觉得你太散漫）"]
+        },
+        motto: "“按自己的节奏行走，办公室就是我的散步庭院。——ISFP「猫」”"
+      },
+      INFP: {
+        title: "INFP 「树袋熊」",
+        profile: "你是职场「宁静的树袋熊」，温和、理想主义，坚守内心的桃花源。你为意义和价值工作，是团队的道德罗盘和治愈者，擅长理解和关怀他人。",
+        strengths: [
+          "价值雷达：能精准判断一件事是否与内心价值观相符。",
+          "语言治愈师：能用文字和语言抚慰人心。",
+          "深度共情：理解并接纳各种不同的情感。"
+        ],
+        weaknesses: [
+          "面对批评和冲突时容易受伤并退缩。",
+          "想法很多，但将理想落地的行动力较弱。",
+          "容易在职场复杂现实中感到理想幻灭。"
+        ],
+        energySources: [
+          "寻找一份有社会价值或人文关怀的工作。",
+          "通过日记、博客记录内心的思考与感受。",
+          "建立一个“心灵安全屋”（可以是物理空间或精神寄托）。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ENFJ「大象」（鼓舞你实现理想）", "ENFP「狗」（理解你的天马行空）"],
+          potentialEnemies: ["ESTJ「蜜蜂」（觉得你不切实际）", "ENTJ「狮子」（认为你效率低下）"]
+        },
+        motto: "“我可以躺平，但我的理想在云端漫步。——INFP「树袋熊」”"
+      },
+      INTP: {
+        title: "INTP 「章鱼」",
+        profile: "你是潜伏在办公室深海区的「智慧章鱼」，好奇心重，逻辑至上。你拥有多个触手（多元兴趣），能同时捕捉各种复杂信息，是团队里解决疑难杂症的「逻辑学家」。",
+        strengths: [
+          "架构大师：善于构建复杂的理论模型。",
+          "问题克星：擅长找到他人忽略的关键漏洞。",
+          "脑洞之王：总能提供意想不到的奇特视角。"
+        ],
+        weaknesses: [
+          "执行力是硬伤，“想法上的巨人，行动上的矮子”。",
+          "极度厌恶琐碎的流程和重复性工作。",
+          "在社交中容易因“过于理性”而显得不近人情。"
+        ],
+        energySources: [
+          "给自己安排不受打扰的“深度思考时间”。",
+          "找一个执行者伙伴帮你把天才想法落地。",
+          "远离需要大量情感安抚的工作。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ENTJ「狮子」（能执行你的战略）", "INFJ「猫头鹰」（能理解你的深邃）"],
+          potentialEnemies: ["ESFJ「海豚」（会觉得你太冷漠）", "ISFJ「牧羊犬」（无法进行逻辑辩论）"]
+        },
+        motto: "“别用条条框框束缚我，我的大脑能连接整个宇宙。——INTP「章鱼」”"
+      },
+      ESTP: {
+        title: "ESTP 「海豹」",
+        profile: "你是职场「敏锐的海豹」，灵活、机智、活在当下。你是即兴发挥的谈判高手和危机解决者，善于抓住一闪而过的机会，最讨厌被关在办公室里研究厚厚的文件。",
+        strengths: [
+          "谈判专家：临场反应快，善于说服和斡旋。",
+          "机会主义者：能敏锐地发现并抓住转瞬即逝的商机。",
+          "实用主义：快速找到问题的核心，避免冗长讨论。"
+        ],
+        weaknesses: [
+          "缺乏耐心，难以进行深度、长期的规划。",
+          "容易因追求刺激而冒不必要的风险。",
+          "可能因说话过于直接而无意中得罪人。"
+        ],
+        energySources: [
+          "选择需要大量对外沟通和出差的工作。",
+          "将工作“游戏化”，设定短期可达成的小目标。",
+          "学习一门竞技体育或技能，释放精力。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ISTP「狐狸」（一起冒险的伙伴）", "ENTJ「狮子」（欣赏你的行动力）"],
+          potentialEnemies: ["INFP「树袋熊」（觉得你太功利）", "INTJ「狼」（认为你缺乏远见）"]
+        },
+        motto: "“行动永远是最好的答案，干就完了！——ESTP「海豹」”"
+      },
+      ESFP: {
+        title: "ESFP 「鹦鹉」",
+        profile: "你是办公室的「快乐鹦鹉」，热情、色彩斑斓、热爱表现。你是公司的活力素和社交中心，有你在的地方就不会冷场，善于用乐观感染每一个人。",
+        strengths: [
+          "氛围担当：天生的表演者和社交家。",
+          "即兴发挥：能轻松应对各种突发社交场合。",
+          "实用乐观：总能发现事情积极的一面，鼓舞团队士气。"
+        ],
+        weaknesses: [
+          "难以专注处理枯燥的数据和冗长的文书工作。",
+          "做事可能缺乏规划，习惯走一步看一步。",
+          "非常在意外界评价，容易因批评而情绪波动。"
+        ],
+        energySources: [
+          "成为公司活动的组织者和主持人。",
+          "将枯燥任务与有趣的事物（如音乐、社交）结合起来。",
+          "建立一个“夸夸群”，也收获他人的赞美。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ENFJ「大象」（帮你规划，欣赏你的活力）", "ISFP「猫」（你的忠实观众）"],
+          potentialEnemies: ["INTJ「狼」（觉得你吵闹肤浅）", "ISTJ「蚂蚁」（无法理解你的随性）"]
+        },
+        motto: "“工作是舞台，快乐是我的生产力！——ESFP「鹦鹉」”"
+      },
+      ENFP: {
+        title: "ENFP 「狗」",
+        profile: "你是团队的「活力催化剂狗」，热情、好奇心重、善于鼓舞人心。你总是能看到每个人的潜力，是点子的永动机，但也很容易对下一个新想法产生兴趣。",
+        strengths: [
+          "灵感喷泉：能持续不断地产生新想法和新项目。",
+          "潜能挖掘机：善于发现并激发团队成员的优点。",
+          "社交连接器：能连接不同的人和信息。"
+        ],
+        weaknesses: [
+          "兴趣转移快，难以将想法持续深入地执行到底。",
+          "讨厌例行公事和繁琐的细节维护。",
+          "情绪波动较大，容易从极度热情陷入短暂emo。"
+        ],
+        energySources: [
+          "同时进行多个项目，满足新鲜感。",
+          "找一个可靠的“执行者”伙伴帮你落地最好的想法。",
+          "定期参加线下活动，接触新朋友和新领域。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["INFJ「猫头鹰」（能深化你的灵感）", "ESTJ「蜜蜂」（帮你把想法变成现实）"],
+          potentialEnemies: ["ISTJ「蚂蚁」（觉得你混乱）", "ISTP「狐狸」（对你的热情无动于衷）"]
+        },
+        motto: "“我不是三分钟热度，我是对世界持续保持一百分的好奇！——ENFP「狗」”"
+      },
+      ENTP: {
+        title: "ENTP 「狐獴」",
+        profile: "你是团队的「辩论家狐獴」，机灵、好奇、是头脑风暴的王者。你以挑战权威和既定规则为乐，善于从反面发现可能性，是创新的催化剂。",
+        strengths: [
+          "逻辑鬼才：善于发现逻辑漏洞，并进行有力反驳。",
+          "概念创新：擅长将不相关的概念连接，产生新创意。",
+          "战略头脑：能快速理解复杂系统的运作模式。"
+        ],
+        weaknesses: [
+          "\"为辩而辩\"，有时会忽视他人的感受和讨论的实际目的。",
+          "执行力往往跟不上思维的步伐。",
+          "容易对缺乏挑战性的日常事务感到厌倦和怠惰。"
+        ],
+        energySources: [
+          "参与有挑战性的战略辩论和脑暴会议。",
+          "寻找能让你不断学习新知识的领域。",
+          "将自己的奇思妙想写成文章或做成视频分享。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["INTJ「狼」（欣赏你的战略头脑）", "INTP「章鱼」（唯一能跟得上你思维的人）"],
+          potentialEnemies: ["ISFJ「牧羊犬」（觉得你总是在挑刺）", "ESFJ「海豚」（认为你在破坏和谐）"]
+        },
+        motto: "“我的存在，就是为了证明‘规定’是用来打破的。——ENTP「狐獴」”"
+      },
+      ESTJ: {
+        title: "ESTJ 「蜜蜂」",
+        profile: "你是职场「高效的蜜蜂」，有组织、执行力强、是天生的管理者。你致力于建设和维护高效的秩序，是项目推进的强大引擎，无法容忍混乱和低效。",
+        strengths: [
+          "执行机器：能将计划迅速、高效地转化为结果。",
+          "组织专家：善于分配任务，理顺流程。",
+          "责任标杆：以身作则，并希望他人也能同样负责。"
+        ],
+        weaknesses: [
+          "有时显得过于强硬和缺乏弹性，听不进反对意见。",
+          "可能过于关注目标和效率，而忽略团队成员的情感需求。",
+          "对不按规矩行事的人缺乏耐心。"
+        ],
+        energySources: [
+          "使用各种效率工具，优化个人和团队的工作流。",
+          "领导项目，享受带领团队达成目标的成就感。",
+          "定期复盘，从成功和失败中提炼经验。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ISTJ「蚂蚁」（完美下属）", "ENTJ「狮子」（战略级伙伴）"],
+          potentialEnemies: ["INFP「树袋熊」（觉得你无情）", "ENFP「狗」（认为你死板）"]
+        },
+        motto: "“效率就是生命，秩序就是美感。——ESTJ「蜜蜂」”"
+      },
+      ESFJ: {
+        title: "ESFJ 「海豚」",
+        profile: "你是团队的「粘合剂海豚」，友善、合群、关心他人。你是天生的主办方和协调员，致力于营造和谐、协作的团队氛围，是大家的“知心哥哥/姐姐”。",
+        strengths: [
+          "社交枢纽：能记住每个人的故事，并促进彼此连接。",
+          "和谐维护者：本能地调解冲突，维护团队凝聚力。",
+          "贴心服务：能提供恰到好处的支持和帮助。"
+        ],
+        weaknesses: [
+          "非常渴望得到他人的认可和喜爱，害怕被批评。",
+          "可能为了维持和谐而回避必要的冲突。",
+          "容易过度卷入同事的私事和情绪。"
+        ],
+        energySources: [
+          "组织团建和社交活动，享受大家的欢乐。",
+          "建立一个“同事关怀清单”，主动提供小温暖。",
+          "收到他人真诚的感谢和反馈。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["ISFJ「牧羊犬」（最佳辅助）", "ENFP「狗」（欣赏你的温暖）"],
+          potentialEnemies: ["INTP「章鱼」（对你的热情无回应）", "ENTJ「狮子」（可能觉得你管太多）"]
+        },
+        motto: "“团队的微笑，是我最大的KPI。——ESFJ「海豚」”"
+      },
+      ENFJ: {
+        title: "ENFJ 「大象」",
+        profile: "你是团队「负责任的大象」，有感染力、有责任感、是天生的领导者。你像象群的家长，能看到并激发每个人的潜能，为团队描绘令人向往的愿景。",
+        strengths: [
+          "精神领袖：能用言语和信念鼓舞和动员团队。",
+          "伯乐眼光：善于发现他人的潜能并为其提供发展机会。",
+          "沟通大师：能清晰地传达想法并调解复杂人际关系。"
+        ],
+        weaknesses: [
+          "容易为他人的成长和发展过度负责，感到心累。",
+          "过于理想化，当团队成员达不到期望时会感到失望。",
+          "有时会因追求和谐而拖延做艰难的决定。"
+        ],
+        energySources: [
+          "看到团队成员在你的带领下获得成长和成功。",
+          "通过演讲、写作等方式传播你的理念。",
+          "找到志同道合的伙伴，共同为理想奋斗。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["INFP「树袋熊」（被你鼓舞的追随者）", "ENTP「狐獴」（帮你完善想法）"],
+          potentialEnemies: ["ISTP「狐狸」（不愿被领导）", "ESTP「海豹」（不受控制）"]
+        },
+        motto: "“我们不是同事，我们是共同成长的家人。——ENFJ「大象」”"
+      },
+      ENTJ: {
+        title: "ENTJ 「狮子」",
+        profile: "你是职场的「指挥官狮子」，霸气、果断、目标导向。你天生就是发号施令的领导者，享受指挥和掌控全局的感觉，带领团队不断攻城略地，实现一个又一个目标。",
+        strengths: [
+          "战略指挥：长远的眼光和强大的规划能力。",
+          "决断力：能在信息不完备的情况下快速做出艰难决策。",
+          "能量满格：天生的驱动力，能激励团队向前冲。"
+        ],
+        weaknesses: [
+          "可能显得过于强势和专制，听不进下属的意见。",
+          "对效率的极致追求，可能让人感觉不近人情。",
+          "容易因过于关注宏观目标而忽略执行细节和员工感受。"
+        ],
+        energySources: [
+          "制定宏大的年度/季度目标，并享受完成它的过程。",
+          "领导一个有挑战性的新项目或新团队。",
+          "在竞争中获胜，享受征服的快感。"
+        ],
+        relationshipGuide: {
+          bestAllies: ["INTJ「狼」（你的军师）", "INTP「章鱼」（你的奇兵）"],
+          potentialEnemies: ["ISFP「猫」（不服从管理）", "INFP「树袋熊」（无法理解你的野心）"]
+        },
+        motto: "“目标所在，吾之所向。——ENTJ「狮子」”"
+      }
+    };
+
+    // 显示结果
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取MBTI类型
+      const urlParams = new URLSearchParams(window.location.search);
+      const mbtiType = urlParams.get('type') || 'ISTJ'; // 默认值
+      
+      const animalInfo = mbtiAnimalMap[mbtiType];
+      const report = mbtiReports[mbtiType];
+      
+      // 生成结果HTML
+      const resultContent = document.getElementById('result-content');
+      resultContent.innerHTML = `
+        <div class="flex flex-col md:flex-row items-center mb-8">
+          <div class="w-32 h-32 rounded-full overflow-hidden mb-4 md:mb-0 md:mr-6">
+            <img src="${animalInfo.image}" alt="${animalInfo.animal}" class="w-full h-full object-cover animal-image">
+          </div>
+          <div class="text-center md:text-left">
+            <h3 class="text-2xl font-bold mb-2">${report.title}</h3>
+            <p class="text-gray-600">${animalInfo.description}</p>
+          </div>
+        </div>
+        
+        <div class="bg-neutral rounded-lg p-6 mb-6">
+          <h4 class="text-lg font-bold mb-3">职场画像</h4>
+          <p>${report.profile}</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-neutral rounded-lg p-6">
+            <h4 class="text-lg font-bold mb-3 flex items-center">
+              <i class="fa fa-star text-yellow-500 mr-2"></i> 超能力
+            </h4>
+            <ul class="list-disc list-inside space-y-2">
+              ${report.strengths.map(strength => `<li>${strength}</li>`).join('')}
+            </ul>
+          </div>
+          
+          <div class="bg-neutral rounded-lg p-6">
+            <h4 class="text-lg font-bold mb-3 flex items-center">
+              <i class="fa fa-exclamation-triangle text-orange-500 mr-2"></i> 脆弱触手
+            </h4>
+            <ul class="list-disc list-inside space-y-2">
+              ${report.weaknesses.map(weakness => `<li>${weakness}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="bg-neutral rounded-lg p-6 mb-6">
+          <h4 class="text-lg font-bold mb-3 flex items-center">
+            <i class="fa fa-battery-full text-green-500 mr-2"></i> 能量补给站
+          </h4>
+          <ul class="list-disc list-inside space-y-2">
+            ${report.energySources.map(source => `<li>${source}</li>`).join('')}
+          </ul>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-neutral rounded-lg p-6">
+            <h4 class="text-lg font-bold mb-3 flex items-center">
+              <i class="fa fa-handshake-o text-blue-500 mr-2"></i> 最佳战友
+            </h4>
+            <ul class="list-disc list-inside space-y-2">
+              ${report.relationshipGuide.bestAllies.map(ally => `<li>${ally}</li>`).join('')}
+            </ul>
+          </div>
+          
+          <div class="bg-neutral rounded-lg p-6">
+            <h4 class="text-lg font-bold mb-3 flex items-center">
+              <i class="fa fa-users text-red-500 mr-2"></i> 潜在天敌
+            </h4>
+            <ul class="list-disc list-inside space-y-2">
+              ${report.relationshipGuide.potentialEnemies.map(enemy => `<li>${enemy}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-primary text-white rounded-lg p-6 text-center">
+          <h4 class="text-lg font-bold mb-2">专属宣言</h4>
+          <p class="italic">${report.motto}</p>
+        </div>
+      `;
+      
+      // 显示结果卡片
+      setTimeout(() => {
+        resultContent.classList.add('show');
+      }, 100);
+      
+      // 下载PDF报告
+      document.getElementById('download-btn').addEventListener('click', function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+        
+        // 获取结果内容的HTML
+        const resultHTML = document.getElementById('result-content');
+        
+        // 使用html2canvas将HTML转换为图片
+        html2canvas(resultHTML).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const imgWidth = 210; // A4宽度
+          const imgHeight = canvas.height * imgWidth / canvas.width;
+          
+          // 添加图片到PDF
+          doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+          
+          // 保存PDF
+          doc.save('MBTI职场动物人格鉴定书.pdf');
+        });
+      });
+      
+      // 重新测试
+      document.getElementById('restart-btn').addEventListener('click', function() {
+        window.location.href = 'test.html';
+      });
+      
+      // 分享结果
+      document.getElementById('share-btn').addEventListener('click', function() {
+        alert('分享功能即将上线，敬请期待！');
+      });
+    });
+  </script>
+</body>
+</html>
