@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MBTI测试结果验证页面</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF7D00',
+            secondary: '#0078D7',
+            accent: '#FF5722',
+            neutral: '#F5F5F5',
+            dark: '#333333',
+            light: '#FFFFFF'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .transition-all-300 {
+        transition: all 0.3s ease;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral min-h-screen font-sans text-dark">
+  <!-- 顶部导航 -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-paw text-primary text-2xl"></i>
+        <h1 class="text-xl font-bold text-dark">MBTI职场动物人格测试结果验证</h1>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 内容区域 -->
+  <section class="py-10 bg-neutral">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center mb-8">MBTI测试结果验证页面</h2>
+      
+      <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-md p-6 md:p-8">
+        <p class="text-gray-600 mb-6">本页面用于验证所有16种MBTI类型的结果是否正确显示。点击下方按钮查看对应类型的结果。</p>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <!-- MBTI类型按钮 -->
+        </div>
+        
+        <div id="result-container" class="border-t border-gray-200 pt-8">
+          <div class="text-center text-gray-500">
+            <p>请点击上方按钮查看对应的MBTI测试结果</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white py-6">
+    <div class="container mx-auto px-4 text-center text-sm text-gray-400">
+      <p>&copy; 2025 MBTI职场动物人格鉴定书. 保留所有权利.</p>
+    </div>
+  </footer>
+
+  <script>
+    // MBTI类型列表
+    const mbtiTypes = [
+      'ISTJ', 'ISFJ', 'INFJ', 'INTJ',
+      'ISTP', 'ISFP', 'INFP', 'INTP',
+      'ESTP', 'ESFP', 'ENFP', 'ENTP',
+      'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ'
+    ];
+    
+    // MBTI类型与职场动物对应关系
+    const mbtiAnimalMap = {
+      ISTJ: { animal: "蚂蚁", description: "可靠、勤奋、恪守规则，是团队的基石。" },
+      ISFJ: { animal: "牧羊犬", description: "忠诚、守护、无私奉献，是同事最信赖的后盾。" },
+      INFJ: { animal: "猫头鹰", description: "智慧、深邃、富有远见，是团队的精神导师。" },
+      INTJ: { animal: "狼", description: "孤傲、战略、目光长远，是独行的战略家。" },
+      ISTP: { animal: "黑豹", description: "孤高的技匠、冷静的解决者，善于潜伏观察，关键时刻一击必中。" },
+      ISFP: { animal: "猫", description: "优雅、审美在线、随性而为，是办公室的氛围营造师。" },
+      INFP: { animal: "树袋熊", description: "温和、理想主义、坚守内心价值观，是团队的治愈者。" },
+      INTP: { animal: "章鱼", description: "好奇、逻辑至上、思维发散，是点子库和理论家。" },
+      ESTP: { animal: "狐狸", description: "敏锐的实干家、机会捕捉者，善于在动态环境中抓住一闪而过的机会。" },
+      ESFP: { animal: "鹦鹉", description: "热情、色彩斑斓、热爱表现，是公司里的快乐源泉。" },
+      ENFP: { animal: "狗", description: "热情、好奇心重、善于鼓舞人心，是团队的活力催化剂。" },
+      ENTP: { animal: "狐獴", description: "机灵、爱辩论、头脑风暴王者，是挑战规则的创新者。" },
+      ESTJ: { animal: "蜜蜂", description: "高效、有组织、执行力强，是天然的团队管理者。" },
+      ESFJ: { animal: "海豚", description: "友善、合群、关心他人，是团队的粘合剂和协调员。" },
+      ENFJ: { animal: "大象", description: "有感染力、有责任感、天生的领导者，是团队的大家长。" },
+      ENTJ: { animal: "狮子", description: "霸气、果断、目标导向，是天生的指挥官。" }
+    };
+    
+    // 创建MBTI类型按钮
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttonContainer = document.querySelector('.grid');
+      
+      mbtiTypes.forEach(type => {
+        const button = document.createElement('button');
+        button.className = 'bg-white hover:bg-primary hover:text-white text-dark font-bold py-2 px-4 rounded-lg border border-gray-300 transition-all-300';
+        button.textContent = type;
+        button.dataset.type = type;
+        
+        button.addEventListener('click', function() {
+          // 移除所有按钮的选中状态
+          document.querySelectorAll('.grid button').forEach(btn => {
+            btn.classList.remove('bg-primary', 'text-white');
+            btn.classList.add('bg-white', 'text-dark');
+          });
+          
+          // 添加当前按钮的选中状态
+          this.classList.remove('bg-white', 'text-dark');
+          this.classList.add('bg-primary', 'text-white');
+          
+          // 显示对应类型的结果
+          showResult(type);
+        });
+        
+        buttonContainer.appendChild(button);
+      });
+    });
+    
+    // 显示结果
+    function showResult(mbtiType) {
+      const resultContainer = document.getElementById('result-container');
+      const animalInfo = mbtiAnimalMap[mbtiType];
+      
+      // 创建iframe来显示结果页面
+      const iframe = document.createElement('iframe');
+      iframe.src = `result.html?type=${mbtiType}`;
+      iframe.className = 'w-full h-[800px] border-0 rounded-lg';
+      iframe.title = `${mbtiType} 测试结果`;
+      
+      // 清空容器并添加iframe
+      resultContainer.innerHTML = '';
+      resultContainer.appendChild(iframe);
+      
+      // 添加类型信息
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'mb-4 text-center';
+      infoDiv.innerHTML = `
+        <h3 class="text-xl font-bold">${mbtiType} - ${animalInfo.animal}</h3>
+        <p class="text-gray-600">${animalInfo.description}</p>
+      `;
+      
+      // 将信息添加到iframe前面
+      resultContainer.insertBefore(infoDiv, iframe);
+    }
+  </script>
+</body>
+</html>
