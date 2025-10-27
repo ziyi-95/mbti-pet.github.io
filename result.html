@@ -23,7 +23,9 @@
             accent: '#FF5722',
             neutral: '#F5F5F5',
             dark: '#333333',
-            light: '#FFFFFF'
+            light: '#FFFFFF',
+            'card-bg': '#f9f9f9',
+            'card-hover': '#f0f0f0'
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -56,6 +58,8 @@
           boxShadow: {
             'custom': '0 4px 20px rgba(0, 0, 0, 0.08)',
             'hover': '0 10px 30px rgba(0, 0, 0, 0.12)',
+            'card': '0 2px 15px rgba(0, 0, 0, 0.05)',
+            'card-hover': '0 5px 20px rgba(0, 0, 0, 0.08)',
           }
         }
       }
@@ -107,6 +111,34 @@
         50% { transform: translateY(-10px); }
         100% { transform: translateY(0px); }
       }
+      .section-card {
+        background-color: theme('colors.card-bg');
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: theme('boxShadow.card');
+        transition: all 0.3s ease;
+      }
+      .section-card:hover {
+        background-color: theme('colors.card-hover');
+        box-shadow: theme('boxShadow.card-hover');
+      }
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+      }
+      .section-title i {
+        margin-right: 0.5rem;
+        color: theme('colors.primary');
+      }
+      .highlight-text {
+        background: linear-gradient(to top, rgba(255, 125, 0, 0.2) 0%, rgba(255, 125, 0, 0.2) 30%, transparent 30%, transparent 100%);
+        padding: 0 4px;
+        display: inline;
+      }
     }
   </style>
 </head>
@@ -116,7 +148,7 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
         <i class="fa fa-paw text-primary text-2xl"></i>
-        <h1 class="text-xl font-bold text-dark">MBTI职场职场动物人格鉴定书</h1>
+        <h1 class="text-xl font-bold text-dark">MBTI职场动物人格鉴定书</h1>
       </div>
       <div class="hidden md:flex items-center space-x-6">
         <a href="index.html" class="text-dark hover:text-primary transition-all-300">首页</a>
@@ -132,7 +164,7 @@
   <!-- 结果区域 -->
   <section id="result" class="py-16 bg-neutral">
     <div class="container mx-auto px-4">
-      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">MBTI职场动物人格人格测试结果</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">MBTI职场动物人格测试结果</h2>
       
       <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-custom p-6 md:p-8">
         <!-- 结果内容 -->
@@ -214,13 +246,13 @@
       },
       INTJ: {
         animal: "狼",
-        image: "https://p26-doubao-search-sign.byteimg.com/labis/abca4cf97557fc2a38ab97697d7ea362~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=MU%2FiYm3eNHBI2bUONo08lG1Jfuc%3D",
+        image: "https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/6d5920c477234c5ebb37d9f178e1dd40~tplv-a9rns2rl98-image.image?rcl=20251027161116A5B93F61992964A0ED85&rk3s=8e244e95&rrcfp=f06b921b&x-expires=1764144745&x-signature=dQOel99KQEzWrup8NhEYREW3dJs%3D",
         description: "孤傲、战略、目光长远，是独行的战略家。"
       },
       ISTP: {
-        animal: "狐狸",
-        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/913481098000334920~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=uei0dRdBCrPW4oSDF1eaAhR1LKM%3D",
-        description: "机敏、务实、善于解决实际问题，是故障排除专家。"
+        animal: "黑豹",
+        image: "https://p26-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2213599661627670532~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777102974&x-signature=dortJv0E2gCil0BeE1UAWHKaI2M%3D",
+        description: "孤高的技匠、冷静的解决者，善于潜伏观察，关键时刻一击必中。"
       },
       ISFP: {
         animal: "猫",
@@ -238,9 +270,9 @@
         description: "好奇、逻辑至上、思维发散，是点子库和理论家。"
       },
       ESTP: {
-        animal: "海豹",
-        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/2028776412779380738~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956403&x-signature=I2L74eH6bVCfT%2FXaDWPAn%2BDERyE%3D",
-        description: "敏锐、灵活、活在当下，是即兴发挥的谈判高手。"
+        animal: "狐狸",
+        image: "https://p3-doubao-search-sign.byteimg.com/tos-cn-i-be4g95zd3a/913481098000334920~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1776956369&x-signature=uei0dRdBCrPW4oSDF1eaAhR1LKM%3D",
+        description: "敏锐的实干家、机会捕捉者，善于在动态环境中抓住一闪而过的机会。"
       },
       ESFP: {
         animal: "鹦鹉",
@@ -283,386 +315,402 @@
     const mbtiReports = {
       ISTJ: {
         title: "ISTJ 「蚂蚁」",
-        profile: "你是职场的「基石蚂蚁」，勤奋、可靠、秩序井然。你信奉规则，做事一丝不苟，是团队中最让人放心的存在。交付给你的任务，就如同放在了最坚固的保险箱里。",
+        profile: "核心身份：ISTJ | 蚂蚁 | 核心标签：秩序的守护者、可靠的执行者\n\n深度人格画像：你是职场生态系统的「基石蚂蚁」。你坚信世界的正常运转依赖于每一个个体的尽职尽责与每一套流程的清晰明确。你拥有强大的事实记忆库和责任感，交付给你的任务就如同被刻在了石头上，绝无疏漏。你对传统、规则和既定的方法抱有天然的敬意，因为那代表了经过时间检验的可靠性。在你看来，混乱即是低效，而清晰即是美德。",
+        thinkingPattern: "主导功能：Si (内向实感) - 依赖过去经验，关注内部感受到的细节和事实。\n\n辅助功能：Te (外向思考) - 通过外部逻辑和效率来组织世界，执行力强。\n\n决策引擎：基于事实和逻辑，追求效率与秩序。",
         strengths: [
-          "极致靠谱：凡事有交代，件件有着落。",
-          "细节掌控者：能发现流程中最微小的漏洞。",
-          "档案库大脑：对过往数据和经验了如指掌。"
+          "极致可靠：言出必行，使命必达。",
+          "细节掌控：能发现并修正流程中最微小的偏差。",
+          "档案库大脑：对历史数据、规则条款了如指掌。"
         ],
         weaknesses: [
-          "难以应对计划外的突发变化。",
-          "有时会因过度注重细节而忽略大局。",
-          "可能被认为缺乏灵活性。"
+          "抗拒变革：对未经检验的新方法持怀疑态度。",
+          "灵活性不足：可能因恪守流程而错过最佳时机。",
+          "忽视人际：有时过于就事论事，显得不近人情。"
         ],
-        energySources: [
-          "使用日历软件，享受计划被打满勾的成就感。",
-          "建立自己的“工作SOP（标准流程）库”。",
-          "每天给自己一个“尝试微改变”的小挑战。"
-        ],
+        energySources: "短期：尝试在无关紧要的小事上主动寻求变化，如换一条下班路线。学习用“我理解你的感受”作为沟通开场白。\n\n长期：从流程执行者向流程优化者转变，利用你的经验去改进规则，而不仅仅是遵守。",
         relationshipGuide: {
-          bestAllies: ["ESTJ「蜜蜂」（效率搭档）", "ESFJ「海豚」（暖心辅助）"],
-          potentialEnemies: ["ENFP「狗」（太随性）", "ENTP「狐獴」（老想推翻规则）"]
+          bestAllies: ["天作之合：ESTJ「蜜蜂」(目标一致的效率搭档)"],
+          potentialEnemies: ["磨合专区：ENFP「狗」(需包容其随性)， INTP「章鱼」(需理解其抽象)\n\n能量黑洞：不断改变规则且不提供合理解释的领导。"]
         },
-        motto: "“世界运转，源于每一个齿轮的恪尽职守。——ISTJ「蚂蚁」”"
+        careerAdvice: [
+          "核心区：审计、会计、行政管理、法律合规、物流管理",
+          "拓展区：项目经理(流程型)、技术支持、后勤采购"
+        ],
+        motto: "“世界立于秩序之上，我愿为砖。——ISTJ「蚂蚁」”"
       },
       ISFJ: {
         title: "ISFJ 「牧羊犬」",
-        profile: "你是团队最忠诚的「守护牧羊犬」，默默观察并支持着每一位成员。你细腻、体贴，是办公室里的“活雷锋”，总能记得同事的喜好，默默打点好一切支持性工作。",
+        profile: "核心身份：ISFJ | 牧羊犬 | 核心标签：忠诚的守护者、温暖的支撑者\n\n深度人格画像：你是团队最温润而坚定的「守护牧羊犬」。你拥有一种敏锐的雷达，能无声地扫描到每个人的需求与不适，并默默提供支持。对你而言，集体的和谐与稳定高于一切。你珍视传统和既定的关系，通过具体的服务和关怀来表达情感。你不是舞台中央的明星，但你是让明星得以闪耀的基石，是团队记忆和温情的活体存储器。",
+        thinkingPattern: "主导功能：Si (内向实感) - 关注与过去经历相关的细节和感受，维护熟悉的和谐。\n\n辅助功能：Fe (外向情感) - 外倾地维护群体和谐，满足他人的情感需求。\n\n决策引擎：基于对他人需求的感知和对稳定和谐的追求。",
         strengths: [
-          "无私奉献：总在背后默默支撑团队。",
-          "超强记性：记得所有同事的偏好和需求。",
-          "危机安抚者：在团队紧张时能主动调节氛围。"
+          "无私奉献：总是那个默默打点好一切的支持者。",
+          "共情关怀：能提供恰到好处的情绪支持和实际帮助。",
+          "严谨务实：对交代的任务能一丝不苟地完成。"
         ],
         weaknesses: [
-          "不善于为自己争取利益，容易吃亏。",
-          "容易过度承接他人的情绪而内耗。",
-          "害怕发生冲突和正面拒绝。"
+          "不善争取：容易成为被忽略的“老黄牛”。",
+          "回避冲突：为维持和谐可能压抑自己的真实需求。",
+          "负担过重：容易过度承接他人的情绪和任务。"
         ],
-        energySources: [
-          "定期清理“情绪垃圾桶”，学会情绪剥离。",
-          "练习说“不”，保护自己的精力。",
-          "建立一个“夸夸清单”，记录别人对你的感谢。"
-        ],
+        energySources: "短期：每周列出自己的贡献，练习在会议上至少发言一次。学会有礼貌地说“我现在有点忙”。\n\n长期：将你的关怀能力系统化，成为团队文化或员工关怀的构建者。",
         relationshipGuide: {
-          bestAllies: ["ESFJ「海豚」（互助姐妹）", "ESTJ「蜜蜂」（被你服务，替你出头）"],
-          potentialEnemies: ["ENTJ「狮子」（显得过于无情）", "INTP「章鱼」（察觉不到你的付出）"]
+          bestAllies: ["天作之合：ESFJ「海豚」(互助姐妹)， ESTJ「蜜蜂」(被你服务，替你主张)"],
+          potentialEnemies: ["磨合专区：ENTP「狐獴」(需忍受其尖锐)， ENTJ「狮子」(需适应其强硬)\n\n能量黑洞：将你的付出视为理所应当、毫无感激之心的环境。"]
         },
-        motto: "“你的后背，交给我来守护。——ISFJ「牧羊犬」”"
+        careerAdvice: [
+          "核心区：人力资源、护士、教师、行政支持、客户服务",
+          "拓展区：心理咨询助理、档案管理、室内设计"
+        ],
+        motto: "“你向前冲锋，后方有我。——ISFJ「牧羊犬」”"
       },
       INFJ: {
         title: "INFJ 「猫头鹰」",
-        profile: "你是职场深度的「洞察猫头鹰」，安静、神秘且富有远见。你看待问题总能直击本质，是团队的精神导师。你追求工作的意义感，无法忍受虚伪和无谓的内卷。",
+        profile: "核心身份：INFJ | 猫头鹰 | 核心标签：精神引路人、直觉洞察者\n\n深度人格画像：你是职场暗夜中的「洞察猫头鹰」，深邃的目光能穿透迷雾，看见他人未曾察觉的模式与意义。你生活在丰富的内心世界，追求整合与圆满。你既是理想主义者，也是秘密的行动派，善于将深刻的洞察转化为鼓舞人心的愿景。你无法忍受虚伪和肤浅，渴望在工作和关系中寻找深度的连接与共同成长的意义。",
+        thinkingPattern: "主导功能：Ni (内向直觉) - 聚焦于内在的洞察、未来和象征意义。\n\n辅助功能：Fe (外向情感) - 外在地表达关怀，促进群体和谐与成长。\n\n决策引擎：基于对未来的预见和对人类价值的关怀。",
         strengths: [
-          "读心术：能敏锐洞察他人的动机和需求。",
-          "未来预言家：善于预见长期趋势和潜在问题。",
-          "理念守护者：为团队注入灵魂和信念。"
+          "深刻洞察：能预见问题本质和长远发展。",
+          "精神引领：善于为团队注入灵魂和信念。",
+          "共情与沟通：能一对一地进行深度交流，鼓舞他人。"
         ],
         weaknesses: [
-          "理想主义，易因现实落差而感到失望。",
-          "内心戏丰富，容易陷入精神内耗。",
-          "对办公室政治和虚伪社交感到深恶痛绝。"
+          "理想主义：易因现实不完美而陷入失望。",
+          "内心耗竭：高敏感易导致情感透支。",
+          "完美主义：对想法守口如瓶，直至它完美无瑕，可能错失先机。"
         ],
-        energySources: [
-          "通过写作、艺术等方式输出自己的思想。",
-          "寻找一小片能践行自己理想的“净土”。",
-          "定期“断网”，进行信息斋戒，保护内心能量。"
-        ],
+        energySources: "短期：定期进行“信息斋戒”，保护内心能量。尝试将想法“粗糙地”先呈现出来。\n\n长期：找到能将你愿景落地的合作伙伴(如ESTJ)。通过写作、辅导等方式输出你的思想。",
         relationshipGuide: {
-          bestAllies: ["ENFJ「大象」（能实现你的理想）", "INTP「章鱼」（深度思想共鸣）"],
-          potentialEnemies: ["ESTP「海豹」（过于现实）", "ISTJ「蚂蚁」（无法理解你的抽象）"]
+          bestAllies: ["天作之合：ENFP「狗」(被你愿景鼓舞)， ENTP「狐獴」(能挑战和完善你的想法)"],
+          potentialEnemies: ["磨合专区：ESTP「狐狸」(需理解其现实)， ISTJ「蚂蚁」(需耐心解释你的直觉)\n\n能量黑洞：充斥着勾心斗角、毫无理想可言的功利环境。"]
         },
-        motto: "“在众人注视表象时，我独望月亮的背面。——INFJ「猫头鹰」”"
+        careerAdvice: [
+          "核心区：心理咨询师、职业规划师、作家、编辑、建筑师",
+          "拓展区：用户体验研究员、品牌战略、组织发展顾问"
+        ],
+        motto: "“我于深处守望，直至看见黎明。——INFJ「猫头鹰」”"
       },
       INTJ: {
         title: "INTJ 「狼」",
-        profile: "你是行走在职场荒野中的「孤狼」，独立、冷静、战略眼光卓越。你享受独自规划蓝图，用效率和能力碾压一切困难。对你而言，团队更像是实现目标的工具。",
+        profile: "核心身份：INTJ | 狼 | 核心标签：孤傲的战略家、系统架构师\n\n深度人格画像：你是游弋于职场旷野的「孤狼」，独立、冷静、目光如炬。对你而言，世界是一个庞大而低效的系统，等待被你重新规划和优化。你享受独自构思宏大的战略蓝图，用智慧和效率碾压一切障碍。关系对你而言是达成目标的协作网络，而非情感慰藉。你尊重能力，蔑视愚蠢，是永不停歇的自主改进机器。",
+        thinkingPattern: "主导功能：Ni (内向直觉) - 聚焦于内在的战略愿景和复杂系统的未来图景。\n\n辅助功能：Te (外向思考) - 通过外部逻辑和效率来执行战略。\n\n决策引擎：基于长远战略效能和逻辑一致性。",
         strengths: [
-          "战略布局：善于制定长期、系统和高效的策略。",
-          "效率至上：本能地优化一切不合理的流程。",
-          "理性洞察：能排除情绪干扰，直指问题核心。"
+          "战略规划：善于制定长期、系统和高效的策略。",
+          "独立决断：能在信息不全时依靠直觉快速决策。",
+          "理性极致：能排除一切情绪干扰，专注于目标。"
         ],
         weaknesses: [
-          "不擅长处理人际情感，显得孤高冷漠。",
-          "容易因为追求完美方案而错失行动先机。",
-          "对能力不足的同伴缺乏耐心。"
+          "人际疏离：显得孤高冷漠，难以融入群体。",
+          "包容性差：对能力不足者缺乏耐心。",
+          "执行脱节：可能因追求完美战略而忽视落地细节。"
         ],
-        energySources: [
-          "绘制你的“战略地图”，享受宏观规划的乐趣。",
-          "找到少数你认可的“聪明大脑”进行交流。",
-          "将大目标分解为可执行的“征服清单”。"
-        ],
+        energySources: "短期：练习将批评包装在“基于效率的肯定”之后。主动向团队成员解释你决策背后的逻辑。\n\n长期：寻找忠诚的“执行者”(如ISTJ)和“挑战者”(如ENTP)作为核心伙伴，弥补自身盲区。",
         relationshipGuide: {
-          bestAllies: ["ENTP「狐獴」（帮你完善逻辑）", "ISTJ「蚂蚁」（完美执行你的计划）"],
-          potentialEnemies: ["ESFP「鹦鹉」（觉得你无趣）", "ESFJ「海豚」（认为你没人情味）"]
+          bestAllies: ["天作之合：INTP「章鱼」(你的军师)， ENTJ「狮子」(战略级对手与伙伴)"],
+          potentialEnemies: ["磨合专区：ESFP「鹦鹉」(需容忍其活泼)， ESFJ「海豚」(需感谢其维系人情)\n\n能量黑洞：需要大量无意义社交和情感安抚的岗位。"]
         },
-        motto: "“我的世界，就是我的战略棋盘。——INTJ「狼」”"
+        careerAdvice: [
+          "核心区：战略顾问、投资分析师、系统架构师、科学家",
+          "拓展区：企业家、研发负责人、军事战略家"
+        ],
+        motto: "“我的征途是星辰大海，而非凡人琐事。——INTJ「狼」”"
       },
       ISTP: {
-        title: "ISTP 「狐狸」",
-        profile: "你是职场「机敏的狐狸」，冷静、务实，是解决突发危机的专家。你信奉“有用即真理”，动手能力极强，在混乱中总能找到最直接有效的解决路径。",
+        title: "ISTP 「黑豹」",
+        profile: "核心身份：ISTP | 黑豹 | 核心标签：孤高的技匠、冷静的解决者\n\n深度人格画像：你是职场阴影中的「孤高黑豹」，冷静、优雅、充满力量。你习惯独自行动，依靠精准的判断和迅猛的出击解决棘手问题。你对工具的驾驭和对环境的利用达到了艺术级别，是沉默的专家。你享受独处的自由，对空洞的头衔和人际应酬不屑一顾，只相信亲手验证过的真理。在众人束手无策时，你总能从意想不到的角度给出致命一击，搞定难题。",
+        thinkingPattern: "主导功能：Ti (内向思考) - 通过内在逻辑框架分析事物如何运作。\n\n辅助功能：Se (外向实感) - 敏锐地感知外部环境，善于随机应变。\n\n决策引擎：基于即时、实用的逻辑和效率。",
         strengths: [
-          "临场救火员：越是紧急情况，头脑越冷静。",
-          "工具大师：善于利用各种工具解决问题。",
-          "实用主义：能抛开理论，找到最直接的方案。"
+          "精准突击：善于潜伏观察，关键时刻一击必中解决核心问题。",
+          "工具大师：善于利用手头一切工具和技术破解难题。",
+          "极致冷静：在压力和危机下能保持超然的镇定。"
         ],
         weaknesses: [
-          "缺乏长期规划，讨厌被长期承诺束缚。",
-          "对抽象理论和公司愿景兴趣缺缺。",
-          "可能因过于“就事论事”而显得冷漠。"
+          "疏离寡言：极度重视个人空间，难以融入团队。",
+          "抗拒束缚：反感权威和既定流程，难以管理。",
+          "缺乏规划：对长期目标和战略规划缺乏兴趣。"
         ],
-        energySources: [
-          "接手有挑战性的“故障排除”任务。",
-          "学习一门新手艺或研究工具的使用。",
-          "确保工作中有足够的“自由活动”时间。"
-        ],
+        energySources: "短期：接手有明确挑战和时限的“救火”任务。在回复时多写两句原因。\n\n长期：成为特定领域受人尊敬的“技术大神”或“故障终结者”，用绝对的专业能力换取自由。",
         relationshipGuide: {
-          bestAllies: ["ESTP「海豹」（玩伴搭档）", "ENTJ「狮子」（给你资源和空间去解决问题）"],
-          potentialEnemies: ["INFJ「猫头鹰」（觉得你缺乏深度）", "ENFJ「大象」（试图对你进行情感动员）"]
+          bestAllies: ["天作之合：ESTP「狐狸」(为你处理人际，带来信息)， ENTJ「狮子」(给你目标和资源，不干涉你的方法)"],
+          potentialEnemies: ["磨合专区：INFJ「猫头鹰」(需理解其深意)， ENFJ「大象」(需应对其情感动员)\n\n能量黑洞：需要频繁进行团队建设、公开演讲和流程汇报的环境。"]
         },
-        motto: "“别跟我说为什么，告诉我怎么修。——ISTP「狐狸」”"
+        careerAdvice: [
+          "核心区：工程师、飞行员、电竞选手、外科医生、法医",
+          "拓展区：刑警、特工、赛车手、顶级工匠"
+        ],
+        motto: "“静则隐匿于市，动则一击致命。——ISTP「黑豹」”"
       },
       ISFP: {
         title: "ISFP 「猫」",
-        profile: "你是办公室里的「美学顾问猫」，优雅、随性、审美在线。你按自己的节奏工作，默默为环境增添美感，讨厌冲突和高压，是团队的氛围营造师和温柔观察者。",
+        profile: "核心身份：ISFP | 猫 | 核心标签：优雅的美学家、温和的实干家\n\n深度人格画像：你是办公室里的「美学顾问猫」，优雅、随和、活在当下。你拥有敏锐的感官，对色彩、和谐与美感有天然的追求。你按自己的节奏和价值观工作，默默为环境增添温度与美感。你讨厌冲突和高压，是团队氛围的柔和剂。你不是言语上的巨人，却是行动上的艺术家，通过具体的作品和体贴的行动来表达自我。你坚信，工作的过程本身也应当是一种享受。",
+        thinkingPattern: "主导功能：Fi (内向情感) - 关注内在的情感、价值观和真实性。\n\n辅助功能：Se (外向实感) - 敏锐感知外部环境，注重当下的审美体验。\n\n决策引擎：基于个人的价值观和当下情境的和谐度。",
         strengths: [
-          "美学滤镜：天生对色彩、设计和和谐感有敏锐度。",
-          "共情天赋：能细腻地体察他人的情绪。",
-          "灵活应变：能很好地适应变化，随遇而安。"
+          "审美在线：天生对色彩、设计和和谐感有敏锐度。",
+          "共情关怀：能细腻体察他人情绪并提供支持。",
+          "灵活务实：动手能力强，能适应变化。"
         ],
         weaknesses: [
-          "非常反感严厉的批评和高压管理。",
-          "不善于为自己争取，容易在竞争中隐形。",
-          "过于注重当下感受，可能缺乏长远规划。"
+          "回避冲突：反感批评和高压，容易在竞争中隐形。",
+          "不善规划：过于注重当下，可能缺乏长远职业规划。",
+          "难以主张：不善于为自己争取利益和表达需求。"
         ],
-        energySources: [
-          "打造一个舒适美观的工位环境。",
-          "从事能发挥审美和共情能力的工作。",
-          "用音乐、绘画等方式进行情绪表达。"
-        ],
+        energySources: "短期：打造一个美观舒适的工位环境。练习用“我喜欢/我认为”来表达自己的看法。\n\n长期：将审美和共情能力发展为专业技能，如设计、护理、园艺等。",
         relationshipGuide: {
-          bestAllies: ["ESFJ「海豚」（给你温暖和鼓励）", "ENFP「狗」（欣赏你的独特，带你玩）"],
-          potentialEnemies: ["ENTJ「狮子」（压力来源）", "ISTJ「蚂蚁」（觉得你太散漫）"]
+          bestAllies: ["天作之合：ESFJ「海豚」(给你温暖和鼓励)， ENFP「狗」(欣赏你的独特)"],
+          potentialEnemies: ["磨合专区：ENTJ「狮子」(压力来源)， ISTJ「蚂蚁」(觉得你散漫)\n\n能量黑洞：严苛批判、毫无美感、充满政治斗争的环境。"]
         },
+        careerAdvice: [
+          "核心区：设计师、花艺师、摄影师、兽医、护士",
+          "拓展区：幼儿教师、瑜伽教练、厨师、艺术家"
+        ],
         motto: "“按自己的节奏行走，办公室就是我的散步庭院。——ISFP「猫」”"
       },
       INFP: {
         title: "INFP 「树袋熊」",
-        profile: "你是职场「宁静的树袋熊」，温和、理想主义，坚守内心的桃花源。你为意义和价值工作，是团队的道德罗盘和治愈者，擅长理解和关怀他人。",
+        profile: "核心身份：INFP | 树袋熊 | 核心标签：宁静的理想家、价值守护者\n\n深度人格画像：你是职场「宁静的树袋熊」，温和、深邃、坚守内心的桃花源。你为意义和价值工作，是你个人道德罗盘的忠诚卫士。你擅长理解和关怀他人，是团队的治愈者和理想之声。当你发现工作与内心价值观相悖时，会感到巨大的痛苦和疏离。你不是在寻找一份职业，而是在寻找一项可以寄托身心的志业。你需要一个允许你做梦，并能将你的梦想 gently 落地的空间。",
+        thinkingPattern: "主导功能：Fi (内向情感) - 深度关注内在的价值观、情感和真实性。\n\n辅助功能：Ne (外向直觉) - 探索外部的各种可能性和意义。\n\n决策引擎：基于个人的价值观和其对世界可能性的影响。",
         strengths: [
-          "价值雷达：能精准判断一件事是否与内心价值观相符。",
-          "语言治愈师：能用文字和语言抚慰人心。",
-          "深度共情：理解并接纳各种不同的情感。"
+          "价值雷达：能精准判断事物是否与内心信念相符。",
+          "深度共情：能理解并接纳各种不同的情感和观点。",
+          "语言治愈：能用文字和语言抚慰人心，激发灵感。"
         ],
         weaknesses: [
-          "面对批评和冲突时容易受伤并退缩。",
-          "想法很多，但将理想落地的行动力较弱。",
-          "容易在职场复杂现实中感到理想幻灭。"
+          "敏感退缩：面对批评和冲突容易受伤并逃避。",
+          "行动滞后：想法宏大，但将理想落地的行动力弱。",
+          "现实抽离：容易在职场复杂现实中感到理想幻灭。"
         ],
-        energySources: [
-          "寻找一份有社会价值或人文关怀的工作。",
-          "通过日记、博客记录内心的思考与感受。",
-          "建立一个“心灵安全屋”（可以是物理空间或精神寄托）。"
-        ],
+        energySources: "短期：寻找工作的小确幸和社会价值。通过日记、创作来疏导情感。\n\n长期：将理想分解为微小可行的步骤。寻找一个务实的保护者(如ESTJ)或激励者(如ENFJ)。",
         relationshipGuide: {
-          bestAllies: ["ENFJ「大象」（鼓舞你实现理想）", "ENFP「狗」（理解你的天马行空）"],
-          potentialEnemies: ["ESTJ「蜜蜂」（觉得你不切实际）", "ENTJ「狮子」（认为你效率低下）"]
+          bestAllies: ["天作之合：ENFJ「大象」(鼓舞你实现理想)， ENFP「狗」(理解你的天马行空)"],
+          potentialEnemies: ["磨合专区：ESTJ「蜜蜂」(觉得你不切实际)， ENTJ「狮子」(认为你效率低下)\n\n能量黑洞：价值观扭曲、唯利是图、缺乏人文关怀的组织。"]
         },
+        careerAdvice: [
+          "核心区：作家、心理咨询师、社工、编辑、翻译",
+          "拓展区：设计师、教师(人文社科)、人力资源(企业文化方向)"
+        ],
         motto: "“我可以躺平，但我的理想在云端漫步。——INFP「树袋熊」”"
       },
       INTP: {
         title: "INTP 「章鱼」",
-        profile: "你是潜伏在办公室深海区的「智慧章鱼」，好奇心重，逻辑至上。你拥有多个触手（多元兴趣），能同时捕捉各种复杂信息，是团队里解决疑难杂症的「逻辑学家」。",
+        profile: "核心身份：INTP | 章鱼 | 核心标签：逻辑学家、点子库、理论架构师\n\n深度人格画像：你是潜伏在办公室深海区的「智慧章鱼」。对你而言，世界是一个巨型的、等待解构的逻辑系统。你享受脑力上的挑战，热衷于用精密的思维触手去拆解万事万物背后的原理和结构，并乐此不疲地构建属于自己的理论模型。在职场中，你并非不合作，只是你合作的优先对象是“真理”而非“人情”。你可能会在会议上突然沉默，那是因为你的内心正进行着高速运算；你也可能对执行琐碎的任务感到痛苦，因为你的能量来源于创造性的思考而非重复性的劳动。",
+        thinkingPattern: "主导功能：Ti (内向思考) - 通过内在逻辑框架分析和判断一切。\n\n辅助功能：Ne (外向直觉) - 善于联想，看到无数种潜在的可能性。\n\n决策引擎：基于逻辑的自洽性和理论的完整性。",
         strengths: [
-          "架构大师：善于构建复杂的理论模型。",
-          "问题克星：擅长找到他人忽略的关键漏洞。",
-          "脑洞之王：总能提供意想不到的奇特视角。"
+          "系统架构：善于从混乱中提炼秩序，构建复杂概念系统。",
+          "精准定位：能迅速穿透表象，找到问题根本症结。",
+          "客观冷静：能排除情绪干扰，做出理性判断。"
         ],
         weaknesses: [
-          "执行力是硬伤，“想法上的巨人，行动上的矮子”。",
-          "极度厌恶琐碎的流程和重复性工作。",
-          "在社交中容易因“过于理性”而显得不近人情。"
+          "执行力缺口：思维的巨人，行动的侏儒。",
+          "社交钝感：难以理解复杂的情感需求和办公室政治。",
+          "兴趣驱动：对缺乏智力挑战的例行公事极度缺乏耐心。"
         ],
-        energySources: [
-          "给自己安排不受打扰的“深度思考时间”。",
-          "找一个执行者伙伴帮你把天才想法落地。",
-          "远离需要大量情感安抚的工作。"
-        ],
+        energySources: "短期：“五分钟启动法”打破行动障碍。寻找“执行者”伙伴(如ESTJ)帮你推动。\n\n长期：成为“专家型”角色，用深度思考能力建立壁垒。选择性进行深度智慧交流。",
         relationshipGuide: {
-          bestAllies: ["ENTJ「狮子」（能执行你的战略）", "INFJ「猫头鹰」（能理解你的深邃）"],
-          potentialEnemies: ["ESFJ「海豚」（会觉得你太冷漠）", "ISFJ「牧羊犬」（无法进行逻辑辩论）"]
+          bestAllies: ["天作之合：ENTJ「狮子」(能执行你的战略)， INFJ「猫头鹰」(能理解你的深邃)"],
+          potentialEnemies: ["磨合专区：ESFJ「海豚」(会觉得你太冷漠)， ISFJ「牧羊犬」(无法进行逻辑辩论)\n\n能量黑洞：需要大量情感安抚和模糊沟通的岗位。"]
         },
-        motto: "“别用条条框框束缚我，我的大脑能连接整个宇宙。——INTP「章鱼」”"
+        careerAdvice: [
+          "核心区：软件架构师、理论研究员、战略顾问、哲学家",
+          "拓展区：大学教授、知识产权律师、金融量化分析师"
+        ],
+        motto: "“别试图用规则禁锢我，我的思维能构建新的世界。——INTP「章鱼」”"
       },
       ESTP: {
-        title: "ESTP 「海豹」",
-        profile: "你是职场「敏锐的海豹」，灵活、机智、活在当下。你是即兴发挥的谈判高手和危机解决者，善于抓住一闪而过的机会，最讨厌被关在办公室里研究厚厚的文件。",
+        title: "ESTP 「狐狸」",
+        profile: "核心身份：ESTP | 狐狸 | 核心标签：敏锐的实干家、机会捕捉者\n\n深度人格画像：你是职场丛林中「敏锐的狐狸」，眼观六路，耳听八方，永远活在行动的当下。你是天生的谈判高手和危机解决者，善于在动态环境中抓住一闪而过的机会。冗长的战略报告和办公室政治让你昏昏欲睡，你渴望亲临一线，在真实的互动和即兴发挥中展现才华。对你而言，最好的计划就是“随机应变”，你信奉的是“干了再说”的行动哲学。",
+        thinkingPattern: "主导功能：Se (外向实感) - 高度关注外部环境，善于利用即时信息和资源。\n\n辅助功能：Ti (内向思考) - 通过内在逻辑快速分析当下情境，做出实用判断。\n\n决策引擎：基于即时效用和现实可行性。",
         strengths: [
-          "谈判专家：临场反应快，善于说服和斡旋。",
-          "机会主义者：能敏锐地发现并抓住转瞬即逝的商机。",
-          "实用主义：快速找到问题的核心，避免冗长讨论。"
+          "临场应变：反应迅速，能轻松应对各种突发状况。",
+          "机会主义：能敏锐发现并抓住转瞬即逝的商机。",
+          "务实高效：快速找到问题核心，避免冗长讨论。"
         ],
         weaknesses: [
-          "缺乏耐心，难以进行深度、长期的规划。",
-          "容易因追求刺激而冒不必要的风险。",
-          "可能因说话过于直接而无意中得罪人。"
+          "缺乏耐心：难以进行深度、长期的规划。",
+          "风险偏好：容易为追求刺激而冒进。",
+          "直言不讳：可能因说话过于直接而无意中得罪人。"
         ],
-        energySources: [
-          "选择需要大量对外沟通和出差的工作。",
-          "将工作“游戏化”，设定短期可达成的小目标。",
-          "学习一门竞技体育或技能，释放精力。"
-        ],
+        energySources: "短期：选择需要大量对外沟通和快速决策的任务。将大目标拆解为有即时反馈的小步骤。\n\n长期：成为前线业务的“救火队长”或“谈判专家”，将你的天赋用于正道。",
         relationshipGuide: {
-          bestAllies: ["ISTP「狐狸」（一起冒险的伙伴）", "ENTJ「狮子」（欣赏你的行动力）"],
-          potentialEnemies: ["INFP「树袋熊」（觉得你太功利）", "INTJ「狼」（认为你缺乏远见）"]
+          bestAllies: ["天作之合：ISTP「黑豹」(一起冒险的伙伴)， ENTJ「狮子」(欣赏你的行动力)"],
+          potentialEnemies: ["磨合专区：INFP「树袋熊」(觉得你太功利)， INTJ「狼」(认为你缺乏远见)\n\n能量黑洞：被束缚在办公室格间里，与一堆枯燥文件为伴。"]
         },
-        motto: "“行动永远是最好的答案，干就完了！——ESTP「海豹」”"
+        careerAdvice: [
+          "核心区：销售、公关、危机管理、侦探、运动员",
+          "拓展区：企业家、贸易商、飞行员、主持人"
+        ],
+        motto: "“行动永远是最好的答案，干就完了！——ESTP「狐狸」”"
       },
       ESFP: {
         title: "ESFP 「鹦鹉」",
-        profile: "你是办公室的「快乐鹦鹉」，热情、色彩斑斓、热爱表现。你是公司的活力素和社交中心，有你在的地方就不会冷场，善于用乐观感染每一个人。",
+        profile: "核心身份：ESFP | 鹦鹉 | 核心标签：活力的表演者、氛围营造家\n\n深度人格画像：你是办公室的「快乐鹦鹉」，热情、色彩斑斓、热爱表现。你是公司的活力素和社交中心，有你在的地方就不会冷场。你天生拥有让平凡事物变得有趣的能力，善于用乐观和实用主义感染每一个人。你关注当下，享受物质世界的美好，对同事的喜怒哀乐感同身受。你认为工作应该充满乐趣，而你就是那个负责制造和传播乐趣的人。",
+        thinkingPattern: "主导功能：Se (外向实感) - 充分体验和享受当下，关注外部环境和人际互动。\n\n辅助功能：Fi (内向情感) - 依据个人情感和价值观做出反应。\n\n决策引擎：基于当下情境带来的体验和情感共鸣。",
         strengths: [
-          "氛围担当：天生的表演者和社交家。",
+          "氛围担当：天生的表演者和社交家，能活跃团队气氛。",
           "即兴发挥：能轻松应对各种突发社交场合。",
-          "实用乐观：总能发现事情积极的一面，鼓舞团队士气。"
+          "实用乐观：总能发现事情积极的一面，鼓舞士气。"
         ],
         weaknesses: [
-          "难以专注处理枯燥的数据和冗长的文书工作。",
-          "做事可能缺乏规划，习惯走一步看一步。",
-          "非常在意外界评价，容易因批评而情绪波动。"
+          "讨厌枯燥：难以专注处理数据和文书工作。",
+          "缺乏规划：做事可能随性，缺乏长远规划。",
+          "在意评价：非常在意外界看法，易因批评情绪波动。"
         ],
-        energySources: [
-          "成为公司活动的组织者和主持人。",
-          "将枯燥任务与有趣的事物（如音乐、社交）结合起来。",
-          "建立一个“夸夸群”，也收获他人的赞美。"
-        ],
+        energySources: "短期：成为公司活动的组织者和主持人。将枯燥任务与有趣形式结合。\n\n长期：将你的表现力和共情力转化为职业优势，如培训、客户关系等。",
         relationshipGuide: {
-          bestAllies: ["ENFJ「大象」（帮你规划，欣赏你的活力）", "ISFP「猫」（你的忠实观众）"],
-          potentialEnemies: ["INTJ「狼」（觉得你吵闹肤浅）", "ISTJ「蚂蚁」（无法理解你的随性）"]
+          bestAllies: ["天作之合：ENFJ「大象」(帮你规划，欣赏你的活力)， ISFP「猫」(你的忠实观众)"],
+          potentialEnemies: ["磨合专区：INTJ「狼」(觉得你吵闹肤浅)， ISTJ「蚂蚁」(无法理解你的随性)\n\n能量黑洞：压抑个性、禁止交流、死气沉沉的环境。"]
         },
+        careerAdvice: [
+          "核心区：公关、导游、培训师、演员、幼师",
+          "拓展区：健身教练、活动策划、零售经理"
+        ],
         motto: "“工作是舞台，快乐是我的生产力！——ESFP「鹦鹉」”"
       },
       ENFP: {
         title: "ENFP 「狗」",
-        profile: "你是团队的「活力催化剂狗」，热情、好奇心重、善于鼓舞人心。你总是能看到每个人的潜力，是点子的永动机，但也很容易对下一个新想法产生兴趣。",
+        profile: "核心身份：ENFP | 狗 | 核心标签：热情的启发者、可能性探索家\n\n深度人格画像：你是团队的「活力催化剂狗」，热情、好奇心重，眼中闪烁着无限可能性的光芒。你是点子的永动机，总能看见每个人的潜力，并善于用充满感染力的方式鼓舞他们。你厌恶条条框框，追求自由和创意，对“我们为什么不能试试这个？”这类问题充满兴趣。你的能量来源于新的连接、新的项目和新的想法，虽然也可能很快对它们失去兴趣，但探索过程本身就已让你满足。",
+        thinkingPattern: "主导功能：Ne (外向直觉) - 探索外部世界的各种可能性和联系。\n\n辅助功能：Fi (内向情感) - 依据内在的价值观和情感来筛选这些可能性。\n\n决策引擎：基于对可能性的兴奋度以及与个人价值观的契合度。",
         strengths: [
-          "灵感喷泉：能持续不断地产生新想法和新项目。",
-          "潜能挖掘机：善于发现并激发团队成员的优点。",
-          "社交连接器：能连接不同的人和信息。"
+          "灵感丰富：能持续产生新想法，是创新的源泉。",
+          "潜能激发：善于发现并激励团队成员的优点。",
+          "社交连接：能连接不同的人和信息。"
         ],
         weaknesses: [
-          "兴趣转移快，难以将想法持续深入地执行到底。",
-          "讨厌例行公事和繁琐的细节维护。",
-          "情绪波动较大，容易从极度热情陷入短暂emo。"
+          "虎头蛇尾：兴趣转移快，难以将想法执行到底。",
+          "逃避琐碎：讨厌例行公事和细节维护。",
+          "情绪波动：能量水平起伏较大。"
         ],
-        energySources: [
-          "同时进行多个项目，满足新鲜感。",
-          "找一个可靠的“执行者”伙伴帮你落地最好的想法。",
-          "定期参加线下活动，接触新朋友和新领域。"
-        ],
+        energySources: "短期：同时进行多个项目以满足新鲜感。找一个可靠的“执行者”伙伴。\n\n长期：成为“创意发起人”或“变革推动者”，将发散思维用于战略规划。",
         relationshipGuide: {
-          bestAllies: ["INFJ「猫头鹰」（能深化你的灵感）", "ESTJ「蜜蜂」（帮你把想法变成现实）"],
-          potentialEnemies: ["ISTJ「蚂蚁」（觉得你混乱）", "ISTP「狐狸」（对你的热情无动于衷）"]
+          bestAllies: ["天作之合：INFJ「猫头鹰」(能深化你的灵感)， ESTJ「蜜蜂」(帮你把想法变成现实)"],
+          potentialEnemies: ["磨合专区：ISTJ「蚂蚁」(觉得你混乱)， ISTP「黑豹」(对你的热情无动于衷)\n\n能量黑洞：等级森严、扼杀创意、不允许试错的文化。"]
         },
+        careerAdvice: [
+          "核心区：策划、营销、公关、创业顾问、教师",
+          "拓展区：心理学家、作家、主持人"
+        ],
         motto: "“我不是三分钟热度，我是对世界持续保持一百分的好奇！——ENFP「狗」”"
       },
       ENTP: {
         title: "ENTP 「狐獴」",
-        profile: "你是团队的「辩论家狐獴」，机灵、好奇、是头脑风暴的王者。你以挑战权威和既定规则为乐，善于从反面发现可能性，是创新的催化剂。",
+        profile: "核心身份：ENTP | 狐獴 | 核心标签：机智的辩论家、思维挑战者\n\n深度人格画像：你是团队的「辩论家狐獴」，机灵、好奇、以挑战权威和既定规则为乐。你拥有敏捷的思维和犀利的口才，善于从反面发现逻辑漏洞和新的可能性。对你而言，真理越辩越明，一场精彩的头脑风暴是最高级的享受。你是指出皇帝没穿衣服的那个孩子，是创新的催化剂，但也可能为了辩论的快感而忽略他人的感受和讨论的实际目的。",
+        thinkingPattern: "主导功能：Ne (外向直觉) - 探索外部世界的各种模式、可能性和连接。\n\n辅助功能：Ti (内向思考) - 用内在的逻辑框架分析和解构一切。\n\n决策引擎：基于逻辑的严谨性和概念上的创新性。",
         strengths: [
-          "逻辑鬼才：善于发现逻辑漏洞，并进行有力反驳。",
+          "逻辑鬼才：善于发现逻辑漏洞，进行有力反驳。",
           "概念创新：擅长将不相关的概念连接，产生新创意。",
           "战略头脑：能快速理解复杂系统的运作模式。"
         ],
         weaknesses: [
-          "\"为辩而辩\"，有时会忽视他人的感受和讨论的实际目的。",
-          "执行力往往跟不上思维的步伐。",
-          "容易对缺乏挑战性的日常事务感到厌倦和怠惰。"
+          "为辩而辩：有时会忽视他人的感受和讨论目的。",
+          "执行力弱：想法多变，落实困难。",
+          "缺乏耐心：对缺乏挑战的日常事务感到厌倦。"
         ],
-        energySources: [
-          "参与有挑战性的战略辩论和脑暴会议。",
-          "寻找能让你不断学习新知识的领域。",
-          "将自己的奇思妙想写成文章或做成视频分享。"
-        ],
+        energySources: "短期：参与有挑战性的战略辩论。为自己的奇思妙想寻找一个落地的锚点。\n\n长期：成为“战略顾问”或“产品架构师”，将批判性思维用于构建而非解构。",
         relationshipGuide: {
-          bestAllies: ["INTJ「狼」（欣赏你的战略头脑）", "INTP「章鱼」（唯一能跟得上你思维的人）"],
-          potentialEnemies: ["ISFJ「牧羊犬」（觉得你总是在挑刺）", "ESFJ「海豚」（认为你在破坏和谐）"]
+          bestAllies: ["天作之合：INTJ「狼」(欣赏你的战略头脑)， INTP「章鱼」(唯一能跟得上你思维的人)"],
+          potentialEnemies: ["磨合专区：ISFJ「牧羊犬」(觉得你总是在挑刺)， ESFJ「海豚」(认为你在破坏和谐)\n\n能量黑洞：强调绝对服从、不允许质疑的权威环境。"]
         },
+        careerAdvice: [
+          "核心区：律师、创业家、战略顾问、产品经理",
+          "拓展区：投资家、评论家、科学家"
+        ],
         motto: "“我的存在，就是为了证明‘规定’是用来打破的。——ENTP「狐獴」”"
       },
       ESTJ: {
         title: "ESTJ 「蜜蜂」",
-        profile: "你是职场「高效的蜜蜂」，有组织、执行力强、是天生的管理者。你致力于建设和维护高效的秩序，是项目推进的强大引擎，无法容忍混乱和低效。",
+        profile: "核心身份：ESTJ | 蜜蜂 | 核心标签：高效的组织者、务实的管理者\n\n深度人格画像：你是职场「高效的蜜蜂」，有组织、执行力强、是天生的管理者。你致力于建设和维护高效的秩序，是项目推进的强大引擎。你无法容忍混乱、拖延和低效，会毫不犹豫地指出并纠正偏离流程的行为。你尊重等级和权威，相信经验，并希望他人也能同样负责。在你看来，目标是用来达成的，承诺是需要兑现的，整个团队应该像蜂巢一样，为了共同的成果而高效、有序地运转。",
+        thinkingPattern: "主导功能：Te (外向思考) - 通过外部的逻辑、效率和目标来组织世界。\n\n辅助功能：Si (内向实感) - 依赖过去的经验和既定程序。\n\n决策引擎：基于效率、结果和传统的可靠性。",
         strengths: [
           "执行机器：能将计划迅速、高效地转化为结果。",
           "组织专家：善于分配任务，理顺流程。",
           "责任标杆：以身作则，并希望他人也能同样负责。"
         ],
         weaknesses: [
-          "有时显得过于强硬和缺乏弹性，听不进反对意见。",
-          "可能过于关注目标和效率，而忽略团队成员的情感需求。",
-          "对不按规矩行事的人缺乏耐心。"
+          "强硬固执：有时显得缺乏弹性，听不进反对意见。",
+          "忽视情感：可能过于关注目标而忽略团队成员感受。",
+          "缺乏远见：可能过于依赖经验，对颠覆性创新反应迟钝。"
         ],
-        energySources: [
-          "使用各种效率工具，优化个人和团队的工作流。",
-          "领导项目，享受带领团队达成目标的成就感。",
-          "定期复盘，从成功和失败中提炼经验。"
-        ],
+        energySources: "短期：在发号施令前，先花一分钟解释“为什么”。尝试欣赏不同工作风格的价值。\n\n长期：从管理者向领导者转变，不仅关注事，也开始关注人的成长。",
         relationshipGuide: {
-          bestAllies: ["ISTJ「蚂蚁」（完美下属）", "ENTJ「狮子」（战略级伙伴）"],
-          potentialEnemies: ["INFP「树袋熊」（觉得你无情）", "ENFP「狗」（认为你死板）"]
+          bestAllies: ["天作之合：ISTJ「蚂蚁」(完美下属)， ENTJ「狮子」(战略级伙伴)"],
+          potentialEnemies: ["磨合专区：INFP「树袋熊」(觉得你无情)， ENFP「狗」(认为你死板)\n\n能量黑洞：缺乏明确目标、纪律涣散、奖惩不明的团队。"]
         },
+        careerAdvice: [
+          "核心区：项目经理、军官、法官、财务总监、行政主管",
+          "拓展区：教师(管理型)、教练、小型企业主"
+        ],
         motto: "“效率就是生命，秩序就是美感。——ESTJ「蜜蜂」”"
       },
       ESFJ: {
         title: "ESFJ 「海豚」",
-        profile: "你是团队的「粘合剂海豚」，友善、合群、关心他人。你是天生的主办方和协调员，致力于营造和谐、协作的团队氛围，是大家的“知心哥哥/姐姐”。",
+        profile: "核心身份：ESFJ | 海豚 | 核心标签：和谐的协调者、温暖的合作者\n\n深度人格画像：你是团队的「粘合剂海豚」，友善、合群、天生关注他人。你是天生的主办方和协调员，致力于营造和谐、协作、充满温情的团队氛围。你拥有出色的社交雷达，能记住每个人的故事和需求，并促进彼此之间的连接。对你而言，集体的认可和和谐高于一切，你无法忍受冲突和紧张的气氛，会本能地去调解和安抚。你通过为他人提供服务来实现自我价值。",
+        thinkingPattern: "主导功能：Fe (外向情感) - 外在地维护群体和谐，满足他人的情感需求。\n\n辅助功能：Si (内向实感) - 关注与过去经历相关的细节，维护传统和既定关系。\n\n决策引擎：基于对群体和谐的影响以及社会的传统价值观。",
         strengths: [
-          "社交枢纽：能记住每个人的故事，并促进彼此连接。",
-          "和谐维护者：本能地调解冲突，维护团队凝聚力。",
+          "社交枢纽：促进团队连接，是信息的中心。",
+          "和谐维护：本能地调解冲突，维护团队凝聚力。",
           "贴心服务：能提供恰到好处的支持和帮助。"
         ],
         weaknesses: [
-          "非常渴望得到他人的认可和喜爱，害怕被批评。",
-          "可能为了维持和谐而回避必要的冲突。",
-          "容易过度卷入同事的私事和情绪。"
+          "渴望认可：非常需要他人的认可，害怕被批评。",
+          "回避冲突：可能为了和谐而回避必要的正面沟通。",
+          "过度卷入：容易过度关心他人的私事和情绪。"
         ],
-        energySources: [
-          "组织团建和社交活动，享受大家的欢乐。",
-          "建立一个“同事关怀清单”，主动提供小温暖。",
-          "收到他人真诚的感谢和反馈。"
-        ],
+        energySources: "短期：学会区分“必要的冲突”和“破坏性的冲突”。练习在满足他人前先关照自己的需求。\n\n长期：将你的人际能力用于构建企业文化或员工关怀体系。",
         relationshipGuide: {
-          bestAllies: ["ISFJ「牧羊犬」（最佳辅助）", "ENFP「狗」（欣赏你的温暖）"],
-          potentialEnemies: ["INTP「章鱼」（对你的热情无回应）", "ENTJ「狮子」（可能觉得你管太多）"]
+          bestAllies: ["天作之合：ISFJ「牧羊犬」(最佳辅助)， ENFP「狗」(欣赏你的温暖)"],
+          potentialEnemies: ["磨合专区：INTP「章鱼」(对你的热情无回应)， ENTJ「狮子」(可能觉得你管太多)\n\n能量黑洞：冷漠疏离、充满恶意竞争、缺乏人情味的环境。"]
         },
+        careerAdvice: [
+          "核心区：人力资源、客户关系、教师、护士、销售(关系型)",
+          "拓展区：非营利组织工作者、牧师、酒店管理"
+        ],
         motto: "“团队的微笑，是我最大的KPI。——ESFJ「海豚」”"
       },
       ENFJ: {
         title: "ENFJ 「大象」",
-        profile: "你是团队「负责任的大象」，有感染力、有责任感、是天生的领导者。你像象群的家长，能看到并激发每个人的潜能，为团队描绘令人向往的愿景。",
+        profile: "核心身份：ENFJ | 大象 | 核心标签：富有魅力的领导者、成长催化师\n\n深度人格画像：你是团队「负责任的大象」，有感染力、有担当、是天生的领导者。你像象群的家长，能敏锐地洞察每个人的潜能和需求，并致力于帮助他人成长。你善于为团队描绘一个令人向往的共同愿景，并用充满激情的语言鼓舞大家为之奋斗。你相信合作与成长的力量，无法忍受自私自利和故步自封。对你而言，领导力意味着服务与责任，带领团队走向更好的未来是你的使命。",
+        thinkingPattern: "主导功能：Fe (外向情感) - 外在地协调人际关系，促进群体和谐与成长。\n\n辅助功能：Ni (内向直觉) - 聚焦于对未来的洞察和共同愿景。\n\n决策引擎：基于对他人和集体发展的益处以及对未来愿景的贡献。",
         strengths: [
           "精神领袖：能用言语和信念鼓舞和动员团队。",
-          "伯乐眼光：善于发现他人的潜能并为其提供发展机会。",
+          "伯乐眼光：善于发现他人的潜能并助其发展。",
           "沟通大师：能清晰地传达想法并调解复杂人际关系。"
         ],
         weaknesses: [
-          "容易为他人的成长和发展过度负责，感到心累。",
-          "过于理想化，当团队成员达不到期望时会感到失望。",
-          "有时会因追求和谐而拖延做艰难的决定。"
+          "过度负责：容易为他人的成长过度操心，感到心累。",
+          "理想主义：当团队成员达不到期望时会感到失望。",
+          "回避决断：有时会因追求和谐而拖延做艰难的人事决定。"
         ],
-        energySources: [
-          "看到团队成员在你的带领下获得成长和成功。",
-          "通过演讲、写作等方式传播你的理念。",
-          "找到志同道合的伙伴，共同为理想奋斗。"
-        ],
+        energySources: "短期：学会授权，信任他人的能力。区分“支持”与“接管”。\n\n长期：成为教练型领导者，专注于培养未来的领导者。",
         relationshipGuide: {
-          bestAllies: ["INFP「树袋熊」（被你鼓舞的追随者）", "ENTP「狐獴」（帮你完善想法）"],
-          potentialEnemies: ["ISTP「狐狸」（不愿被领导）", "ESTP「海豹」（不受控制）"]
+          bestAllies: ["天作之合：INFP「树袋熊」(被你鼓舞的追随者)， ENTP「狐獴」(帮你完善想法)"],
+          potentialEnemies: ["磨合专区：ISTP「黑豹」(不愿被领导)， ESTP「狐狸」(不受控制)\n\n能量黑洞：人心涣散、缺乏集体荣誉感和共同目标的团队。"]
         },
+        careerAdvice: [
+          "核心区：教师、教练、心理咨询师、人力资源、政治家",
+          "拓展区：牧师、作家、团队建设顾问"
+        ],
         motto: "“我们不是同事，我们是共同成长的家人。——ENFJ「大象」”"
       },
       ENTJ: {
         title: "ENTJ 「狮子」",
-        profile: "你是职场的「指挥官狮子」，霸气、果断、目标导向。你天生就是发号施令的领导者，享受指挥和掌控全局的感觉，带领团队不断攻城略地，实现一个又一个目标。",
+        profile: "核心身份：ENTJ | 狮子 | 核心标签：霸气的指挥官、战略布局师\n\n深度人格画像：你是职场的「指挥官狮子」，霸气、果断、目标导向。你天生就是发号施令的领导者，享受指挥和掌控全局的感觉，带领团队不断攻城略地。你拥有长远的战略眼光和强大的规划能力，能在复杂局面中迅速找到通往胜利的路径。你尊重能力和效率，蔑视愚蠢和懦弱，对停滞不前和安于现状感到极度不耐烦。在你麾下，整个团队会变成一台高效运转的战争机器。",
+        thinkingPattern: "主导功能：Te (外向思考) - 通过外部的逻辑、效率和目标来组织和指挥世界。\n\n辅助功能：Ni (内向直觉) - 聚焦于内在的战略愿景和长远布局。\n\n决策引擎：基于战略效能和目标的达成。",
         strengths: [
-          "战略指挥：长远的眼光和强大的规划能力。",
-          "决断力：能在信息不完备的情况下快速做出艰难决策。",
+          "战略指挥：强大的长远规划和系统布局能力。",
+          "决断力：能在信息不完备时快速做出艰难决策。",
           "能量满格：天生的驱动力，能激励团队向前冲。"
         ],
         weaknesses: [
-          "可能显得过于强势和专制，听不进下属的意见。",
-          "对效率的极致追求，可能让人感觉不近人情。",
-          "容易因过于关注宏观目标而忽略执行细节和员工感受。"
+          "过于强势：可能显得专制，听不进下属意见。",
+          "不近人情：对效率的追求可能让人感觉冷漠。",
+          "忽视细节：容易因关注宏观而忽略执行细节和员工感受。"
         ],
-        energySources: [
-          "制定宏大的年度/季度目标，并享受完成它的过程。",
-          "领导一个有挑战性的新项目或新团队。",
-          "在竞争中获胜，享受征服的快感。"
-        ],
+        energySources: "短期：练习在发布命令前，花时间倾听不同意见。尝试公开表扬他人的贡献。\n\n长期：从指挥官向领袖转变，学会用愿景和影响力领导，而不仅仅是权威。",
         relationshipGuide: {
-          bestAllies: ["INTJ「狼」（你的军师）", "INTP「章鱼」（你的奇兵）"],
-          potentialEnemies: ["ISFP「猫」（不服从管理）", "INFP「树袋熊」（无法理解你的野心）"]
+          bestAllies: ["天作之合：INTJ「狼」(你的军师)， INTP「章鱼」(你的奇兵)"],
+          potentialEnemies: ["磨合专区：ISFP「猫」(不服从管理)， INFP「树袋熊」(无法理解你的野心)\n\n能量黑洞：缺乏雄心、安于现状、抗拒改变的团队文化。"]
         },
+        careerAdvice: [
+          "核心区：企业家、首席执行官、投资银行家、政治家、高级军官",
+          "拓展区：律师(诉讼)、战略顾问、导演"
+        ],
         motto: "“目标所在，吾之所向。——ENTJ「狮子」”"
       }
     };
@@ -679,73 +727,137 @@
       // 生成结果HTML
       const resultContent = document.getElementById('result-content');
       resultContent.innerHTML = `
-        <div class="flex flex-col md:flex-row items-center mb-8">
-          <div class="w-32 h-32 rounded-full overflow-hidden mb-4 md:mb-0 md:mr-6">
+        <!-- 头部信息 -->
+        <div class="flex flex-col md:flex-row items-center mb-10">
+          <div class="w-36 h-36 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8 border-4 border-white shadow-lg">
             <img src="${animalInfo.image}" alt="${animalInfo.animal}" class="w-full h-full object-cover animal-image">
           </div>
           <div class="text-center md:text-left">
-            <h3 class="text-2xl font-bold mb-2">${report.title}</h3>
-            <p class="text-gray-600">${animalInfo.description}</p>
+            <h3 class="text-3xl font-bold mb-3">${report.title}</h3>
+            <p class="text-gray-600 text-lg">${animalInfo.description}</p>
           </div>
         </div>
         
-        <div class="bg-neutral rounded-lg p-6 mb-6">
-          <h4 class="text-lg font-bold mb-3">职场画像</h4>
-          <p>${report.profile}</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-neutral rounded-lg p-6">
-            <h4 class="text-lg font-bold mb-3 flex items-center">
-              <i class="fa fa-star text-yellow-500 mr-2"></i> 超能力
-            </h4>
-            <ul class="list-disc list-inside space-y-2">
-              ${report.strengths.map(strength => `<li>${strength}</li>`).join('')}
-            </ul>
-          </div>
-          
-          <div class="bg-neutral rounded-lg p-6">
-            <h4 class="text-lg font-bold mb-3 flex items-center">
-              <i class="fa fa-exclamation-triangle text-orange-500 mr-2"></i> 脆弱触手
-            </h4>
-            <ul class="list-disc list-inside space-y-2">
-              ${report.weaknesses.map(weakness => `<li>${weakness}</li>`).join('')}
-            </ul>
-          </div>
-        </div>
-        
-        <div class="bg-neutral rounded-lg p-6 mb-6">
-          <h4 class="text-lg font-bold mb-3 flex items-center">
-            <i class="fa fa-battery-full text-green-500 mr-2"></i> 能量补给站
+        <!-- 职场画像 -->
+        <div class="section-card mb-8">
+          <h4 class="section-title">
+            <i class="fa fa-id-card-o"></i> 职场画像
           </h4>
-          <ul class="list-disc list-inside space-y-2">
-            ${report.energySources.map(source => `<li>${source}</li>`).join('')}
-          </ul>
+          <div class="space-y-4">
+            <p class="whitespace-pre-line leading-relaxed">${report.profile}</p>
+          </div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-neutral rounded-lg p-6">
-            <h4 class="text-lg font-bold mb-3 flex items-center">
-              <i class="fa fa-handshake-o text-blue-500 mr-2"></i> 最佳战友
+        <!-- 思维模式解析 -->
+        <div class="section-card mb-8">
+          <h4 class="section-title">
+            <i class="fa fa-lightbulb-o"></i> 思维模式解析
+          </h4>
+          <div class="space-y-4">
+            <p class="whitespace-pre-line leading-relaxed">${report.thinkingPattern}</p>
+          </div>
+        </div>
+        
+        <!-- 职场优劣势 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <!-- 核心优势 -->
+          <div class="section-card">
+            <h4 class="section-title">
+              <i class="fa fa-star text-yellow-500"></i> 核心优势
             </h4>
-            <ul class="list-disc list-inside space-y-2">
-              ${report.relationshipGuide.bestAllies.map(ally => `<li>${ally}</li>`).join('')}
-            </ul>
+            <div class="space-y-3">
+              ${report.strengths.map((strength, index) => `
+                <div class="flex items-start">
+                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2 mt-1">${index + 1}</span>
+                  <p>${strength}</p>
+                </div>
+              `).join('')}
+            </div>
           </div>
           
-          <div class="bg-neutral rounded-lg p-6">
-            <h4 class="text-lg font-bold mb-3 flex items-center">
-              <i class="fa fa-users text-red-500 mr-2"></i> 潜在天敌
+          <!-- 发展挑战 -->
+          <div class="section-card">
+            <h4 class="section-title">
+              <i class="fa fa-exclamation-triangle text-orange-500"></i> 发展挑战
             </h4>
-            <ul class="list-disc list-inside space-y-2">
-              ${report.relationshipGuide.potentialEnemies.map(enemy => `<li>${enemy}</li>`).join('')}
-            </ul>
+            <div class="space-y-3">
+              ${report.weaknesses.map((weakness, index) => `
+                <div class="flex items-start">
+                  <span class="bg-red-100 text-red-800 text-xs font-medium px-2 py-0.5 rounded-full mr-2 mt-1">${index + 1}</span>
+                  <p>${weakness}</p>
+                </div>
+              `).join('')}
+            </div>
           </div>
         </div>
         
-        <div class="bg-gradient-primary text-white rounded-lg p-6 text-center">
-          <h4 class="text-lg font-bold mb-2">专属宣言</h4>
-          <p class="italic">${report.motto}</p>
+        <!-- 专属成长路径 -->
+        <div class="section-card mb-8">
+          <h4 class="section-title">
+            <i class="fa fa-road"></i> 专属成长路径
+          </h4>
+          <div class="space-y-4">
+            <p class="whitespace-pre-line leading-relaxed">${report.energySources}</p>
+          </div>
+        </div>
+        
+        <!-- 职场关系指南 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <!-- 最佳战友 -->
+          <div class="section-card">
+            <h4 class="section-title">
+              <i class="fa fa-handshake-o text-blue-500"></i> 最佳战友
+            </h4>
+            <div class="space-y-3">
+              ${report.relationshipGuide.bestAllies.map(ally => `
+                <div class="flex items-start">
+                  <i class="fa fa-user-plus text-blue-400 mt-1 mr-2"></i>
+                  <p>${ally}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          
+          <!-- 潜在天敌 -->
+          <div class="section-card">
+            <h4 class="section-title">
+              <i class="fa fa-users text-red-500"></i> 潜在天敌
+            </h4>
+            <div class="space-y-4">
+              <p class="whitespace-pre-line leading-relaxed">${report.relationshipGuide.potentialEnemies[0]}</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 适合的职业方向 -->
+        <div class="section-card mb-8">
+          <h4 class="section-title">
+            <i class="fa fa-briefcase text-purple-500"></i> 适合的职业方向
+          </h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h5 class="font-semibold mb-3 text-lg">核心区</h5>
+              <div class="flex flex-wrap gap-2">
+                ${report.careerAdvice[0].replace('核心区：', '').split('、').map(career => `
+                  <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">${career}</span>
+                `).join('')}
+              </div>
+            </div>
+            <div>
+              <h5 class="font-semibold mb-3 text-lg">拓展区</h5>
+              <div class="flex flex-wrap gap-2">
+                ${report.careerAdvice[1].replace('拓展区：', '').split('、').map(career => `
+                  <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">${career}</span>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 专属职场宣言 -->
+        <div class="bg-gradient-primary text-white rounded-xl p-8 text-center shadow-lg">
+          <h4 class="text-xl font-bold mb-4">专属职场宣言</h4>
+          <p class="italic text-lg leading-relaxed">${report.motto}</p>
         </div>
       `;
       
@@ -789,3 +901,4 @@
   </script>
 </body>
 </html>
+
