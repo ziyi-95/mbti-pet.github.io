@@ -156,8 +156,8 @@
         <!-- 测试进度 -->
         <div class="mb-8">
           <div class="flex justify-between text-sm text-gray-500 mb-2">
-            <span>问题 <span id="current-question">1</span>/20</span>
-            <span>进度 <span id="progress-percentage">5%</span></span>
+            <span>问题 <span id="current-question">1</span>/30</span>
+            <span>进度 <span id="progress-percentage">3%</span></span>
           </div>
           <div class="progress-bar">
             <div class="progress-bar-fill" style="width: 5%"></div>
@@ -167,15 +167,15 @@
         <!-- 测试题目题目 -->
         <div id="test-container">
           <div id="question-container" class="mb-6 animate-fade-in">
-            <h3 id="question-text" class="text-xl font-xl font-bold mb-4">在周末周末，你更倾向于于如何充电？</h3>
+            <h3 id="question-text" class="text-xl font-xl font-bold mb-4">当参与一个需要多人协作的项目时，你更倾向于：</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="option-card border border-gray-200 rounded-lg p-4 relative" data-option="A" data-score="E">
-                <h4 class="font-bold mb-2">A. 约朋友出门，参加社交活动。</h4>
+                <h4 class="font-bold mb-2">A. 频繁与团队成员沟通，在讨论中推进工作。</h4>
               </div>
               
               <div class="option-card border border-gray-200 rounded-lg p-4 relative" data-option="B" data-score="I">
-                <h4 class="font-bold mb-2">B. 在家休息，享受独处时光。</h4>
+                <h4 class="font-bold mb-2">B. 先独立完成自己负责的部分，再进行必要对接。</h4>
               </div>
             </div>
           </div>
@@ -233,45 +233,73 @@
     // 测试题目数据
     const questions = [
       {
-        text: "在周末，你更倾向于如何充电？",
+        text: "当参与一个需要多人协作的项目时，你更倾向于：",
         options: [
-          { letter: "A", text: "约朋友出门，参加社交活动。", score: "E" },
-          { letter: "B", text: "在家休息，享受独处时光。", score: "I" }
+          { letter: "A", text: "频繁与团队成员沟通，在讨论中推进工作。", score: "E" },
+          { letter: "B", text: "先独立完成自己负责的部分，再进行必要对接。", score: "I" }
         ]
       },
       {
-        text: "当你思考一个复杂问题时，你通常？",
+        text: "午休时间，你更愿意：",
         options: [
-          { letter: "A", text: "喜欢说出来，和他人讨论来理清思路。", score: "E" },
-          { letter: "B", text: "在内心反复思索，自己找到答案。", score: "I" }
+          { letter: "A", text: "和同事一起吃饭、聊天，这是放松和社交的好时机。", score: "E" },
+          { letter: "B", text: "独自休息，看看手机、散散步，享受无人打扰的宁静。", score: "I" }
         ]
       },
       {
-        text: "公司团建对你来说意味着？",
+        text: "在思考一个复杂问题时，你通常：",
         options: [
-          { letter: "A", text: "令人期待的社交和娱乐机会。", score: "E" },
-          { letter: "B", text: "一项需要消耗精力的工作任务。", score: "I" }
+          { letter: "A", text: "喜欢说出来，通过与他人交谈来理清思路。", score: "E" },
+          { letter: "B", text: "在内心反复推演，自己找到答案。", score: "I" }
         ]
       },
       {
-        text: "你更欣赏哪种类型的同事？",
+        text: "公司年会对你来说更像是：",
         options: [
-          { letter: "A", text: "注重实际，能把事情一步一个脚印做好的。", score: "S" },
-          { letter: "B", text: "头脑灵活，总能提出新奇点和未来规划的。", score: "N" }
+          { letter: "A", text: "一场令人期待的社交盛宴和表现舞台。", score: "E" },
+          { letter: "B", text: "一项必须完成的、有些耗费精力的集体任务。", score: "I" }
         ]
       },
       {
-        text: "当你学习一项新技能时，你更关注？",
+        text: "当你学习一项新软件技能时，你更喜欢：",
         options: [
-          { letter: "A", text: "具体的操作步骤和当下的实用技巧。", score: "S" },
-          { letter: "B", text: "这项技能的底层逻辑和未来的应用可能。", score: "N" }
+          { letter: "A", text: "参加一个线下培训课，和同学一起学。", score: "E" },
+          { letter: "B", text: "找一套线上课程，按照自己的节奏安静地学。", score: "I" }
         ]
       },
       {
-        text: "老板说“市场前景很好”，你第一时间会想到？",
+        text: "你更欣赏哪种类型的领导？",
         options: [
-          { letter: "A", text: "具体的增长数据和已看到的成功案例。", score: "S" },
-          { letter: "B", text: "未来的宏大蓝图和无限的想象空间。", score: "N" }
+          { letter: "A", text: "指令清晰，告诉你具体“怎么做”和“何时完成”。", score: "S" },
+          { letter: "B", text: "只告诉你“要什么”，给你发挥创造力的空间。", score: "N" }
+        ]
+      },
+      {
+        text: "阅读一份行业报告时，你通常更关注：",
+        options: [
+          { letter: "A", text: "具体的统计数据、案例和已发生的事实。", score: "S" },
+          { letter: "B", text: "报告结论揭示的未来趋势和潜在可能性。", score: "N" }
+        ]
+      },
+      {
+        text: "当被要求描述一个项目时，你的描述更倾向于：",
+        options: [
+          { letter: "A", text: "详细说明项目的具体步骤、时间节点和交付物。", score: "S" },
+          { letter: "B", text: "阐述项目的宏观愿景、核心概念和长远影响。", score: "N" }
+        ]
+      },
+      {
+        text: "在策划一个活动时，你的强项在于：",
+        options: [
+          { letter: "A", text: "设计严谨的流程、预算和应对各种意外的备案。", score: "S" },
+          { letter: "B", text: "提出新颖的主题、构思爆点和创造独特的体验。", score: "N" }
+        ]
+      },
+      {
+        text: "当你参观一家创新公司，什么更让你兴奋？",
+        options: [
+          { letter: "A", text: "看到他们高效、成熟的工作流程和管理体系。", score: "S" },
+          { letter: "B", text: "感受到他们充满活力、鼓励试错的企业文化。", score: "N" }
         ]
       },
       {
@@ -282,10 +310,24 @@
         ]
       },
       {
-        text: "当同事的工作出现失误时，你更可能？",
+        text: "当同事因个人失误影响到你时，你的第一反应是？",
         options: [
-          { letter: "A", text: "直接指出错误所在，并分析其后果。", score: "T" },
-          { letter: "B", text: "先安慰对方，再一起寻找补救办法。", score: "F" }
+          { letter: "A", text: "直接指出这个错误对项目进度造成的影响。", score: "T" },
+          { letter: "B", text: "理解他可能不是故意的，并先安抚他的情绪。", score: "F" }
+        ]
+      },
+      {
+        text: "你认为在职场中，更重要的能力是？",
+        options: [
+          { letter: "A", text: "分析问题、解决复杂事务的硬实力。", score: "T" },
+          { letter: "B", text: "理解他人、促进团队协作的软实力。", score: "F" }
+        ]
+      },
+      {
+        text: "当你需要给同事提反对意见时，你通常会？",
+        options: [
+          { letter: "A", text: "一针见血地指出方案中的逻辑漏洞和事实错误。", score: "T" },
+          { letter: "B", text: "先肯定对方的努力和想法中的优点，再委婉建议。", score: "F" }
         ]
       },
       {
@@ -298,8 +340,8 @@
       {
         text: "你如何管理你的工作日？",
         options: [
-          { letter: "A", text: "提前制定清晰的计划清单，并严格遵守。", score: "J" },
-          { letter: "B", text: "有个大致方向，喜欢灵活应对，随性而为。", score: "P" }
+          { letter: "A", text: "提前制定清晰的计划清单，并尽量严格遵守。", score: "J" },
+          { letter: "B", text: "有个大致方向，喜欢灵活应对，随机应变。", score: "P" }
         ]
       },
       {
@@ -310,66 +352,94 @@
         ]
       },
       {
-        text: "你认为“不确定性”在工作中是？",
+        text: "你认为“计划外的工作任务”是？",
         options: [
-          { letter: "A", text: "应该尽量避免的风险和麻烦。", score: "J" },
-          { letter: "B", text: "可能带来惊喜的机遇和挑战。", score: "P" }
+          { letter: "A", text: "令人反感的，它打乱了我原有的有序安排。", score: "J" },
+          { letter: "B", text: "一种调剂，可能带来新的挑战和乐趣。", score: "P" }
         ]
       },
       {
-        text: "你更擅长处理哪类任务？",
+        text: "在开始一个长期项目时，你更倾向于？",
         options: [
-          { letter: "A", text: "有明确流程和标准的重复性工作。", score: "S" },
-          { letter: "B", text: "需要创造力和发散思维的全新挑战。", score: "N" }
+          { letter: "A", text: "在动手前，先花时间规划好完整的路径和里程碑。", score: "J" },
+          { letter: "B", text: "先动手干起来，在过程中逐步明确方向和细节。", score: "P" }
+        ]
+      },
+      {
+        text: "你的办公桌面（包括电脑桌面）通常是？",
+        options: [
+          { letter: "A", text: "整洁有序，物品和文件都有固定的位置。", score: "J" },
+          { letter: "B", text: "略显凌乱，但我知道每样东西大概在哪里。", score: "P" }
+        ]
+      },
+      {
+        text: "当工作遇到瓶颈，毫无头绪时，你更可能？",
+        options: [
+          { letter: "A", text: "查阅相关资料或向有经验的人寻求方法论。", score: "S" },
+          { letter: "B", text: "暂时放下去做别的事，等待灵感的降临。", score: "N" }
+        ]
+      },
+      {
+        text: "你更容易为什么样的团队氛围感到满意？",
+        options: [
+          { letter: "A", text: "目标明确，竞争向上，按绩效说话。", score: "T" },
+          { letter: "B", text: "关系融洽，互帮互助，像一家人。", score: "F" }
+        ]
+      },
+      {
+        text: "你更无法忍受哪种领导？",
+        options: [
+          { letter: "A", text: "朝令夕改，思路混乱，让下属无所适从。", score: "P" },
+          { letter: "B", text: "不近人情，只关心KPI，从不体恤下属。", score: "F" }
+        ]
+      },
+      {
+        text: "在职业发展上，什么对你更有吸引力？",
+        options: [
+          { letter: "A", text: "一个清晰、稳定、可预期的晋升路径。", score: "J" },
+          { letter: "B", text: "一个能不断接触新领域、充满变化的工作内容。", score: "P" }
+        ]
+      },
+      {
+        text: "当你与一位同事发生观点冲突时，你通常认为？",
+        options: [
+          { letter: "A", text: "总有一方是更符合事实和逻辑的，最好辩清楚。", score: "T" },
+          { letter: "B", text: "没有绝对的对错，维护良好的合作关系更重要。", score: "F" }
+        ]
+      },
+      {
+        text: "你如何看待公司制定的详细规章制度？",
+        options: [
+          { letter: "A", text: "是保障效率和组织运转的必要框架，应当遵守。", score: "J" },
+          { letter: "B", text: "是束缚创造力的条条框框，只要结果好可以不拘泥。", score: "P" }
         ]
       },
       {
         text: "在会议上，你的角色更接近？",
         options: [
-          { letter: "A", text: "推动议程、得出结论的负责人。", score: "J" },
-          { letter: "B", text: "提出各种新选项和新可能的发起人。", score: "P" }
+          { letter: "A", text: "推动议程、得出结论、分配任务的人。", score: "J" },
+          { letter: "B", text: "提出各种新选项、新角度和可能性的人。", score: "P" }
         ]
       },
       {
-        text: "同事向你倾诉私人烦恼，你会？",
+        text: "你更相信什么能带来职场成功？",
         options: [
-          { letter: "A", text: "帮他分析问题，给出理性的解决方案。", score: "T" },
-          { letter: "B", text: "努力理解他的感受，提供情感上的支持。", score: "F" }
+          { letter: "A", text: "专业能力、严谨的计划和坚定的执行力。", score: "J" },
+          { letter: "B", text: "人脉关系、抓住机遇的能力和灵活的应变。", score: "P" }
         ]
       },
       {
-        text: "当你进入一个新团队，你会？",
+        text: "当你感到工作压力巨大时，你首选的解压方式是？",
         options: [
-          { letter: "A", text: "主动认识大家，快速融入集体。", score: "E" },
-          { letter: "B", text: "先观察一段时间，和个别人建立深度连接。", score: "I" }
+          { letter: "A", text: "独自通过游戏、阅读等方式沉浸在自己的世界。", score: "I" },
+          { letter: "B", text: "找朋友或同事倾诉、聚餐、参加社交活动。", score: "E" }
         ]
       },
       {
-        text: "你相信什么？",
+        text: "你如何定义一份“好工作”？",
         options: [
-          { letter: "A", text: "事实、数据和经验。", score: "S" },
-          { letter: "B", text: "灵感、直觉和可能性。", score: "N" }
-        ]
-      },
-      {
-        text: "你更希望自己以什么而闻名？",
-        options: [
-          { letter: "A", text: "有能力，有成果，说到做到。", score: "TJ" },
-          { letter: "B", text: "有同情心，有洞察力，是个好人。", score: "FP" }
-        ]
-      },
-      {
-        text: "如果赢得一次团体旅行，你希望是？",
-        options: [
-          { letter: "A", text: "行程紧凑、景点丰富的观光之旅。", score: "J" },
-          { letter: "B", text: "随心所欲、探索发现的冒险之旅。", score: "P" }
-        ]
-      },
-      {
-        text: "你认为职场中最重要的品质是？",
-        options: [
-          { letter: "A", text: "效率和能力。", score: "T" },
-          { letter: "B", text: "合作和沟通。", score: "F" }
+          { letter: "A", text: "薪酬福利好，岗位稳定，能实现个人能力提升。", score: "S" },
+          { letter: "B", text: "氛围自由，同事有趣，工作内容是自己热爱的。", score: "F" }
         ]
       }
     ];
@@ -448,15 +518,7 @@
 
       // 更新分数
       function updateScores(score) {
-        if (score.includes('T') || score.includes('J')) {
-          if (score.includes('T')) scores.T++;
-          if (score.includes('J')) scores.J++;
-        } else if (score.includes('F') || score.includes('P')) {
-          if (score.includes('F')) scores.F++;
-          if (score.includes('P')) scores.P++;
-        } else {
-          scores[score]++;
-        }
+        scores[score]++;
       }
 
       // 计算MBTI类型
